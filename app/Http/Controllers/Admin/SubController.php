@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class OLTController
+class SubBoxController
 {
     public function storeOLT(Request $request)
     {
