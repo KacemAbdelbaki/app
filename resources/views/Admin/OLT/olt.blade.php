@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">Liste de livreur</h4>
+                                <h4 class="mb-sm-0 font-size-18">Liste des OLTs</h4>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h4 class="card-title">Vous pouvez supprimer ou modifier des informations concernant les Personnels</h4>
+                                    <h4 class="card-title">Vous pouvez supprimer ou modifier des informations concernant les OLTs</h4>
                                     <br />
                                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                         <thead>
@@ -79,7 +79,6 @@
                                             </tr>
                                         </thead>
 
-
                                         <tbody>
                                             @foreach ($data as $item)
                                                 <tr>
@@ -88,10 +87,11 @@
                                                     <td style="vertical-align: middle;">{{ $item->modele }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->adresse }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->type_carte }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->num_slot_board }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->numero_slot_board }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->date_mise_service }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->carte_id }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->hub_id }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->latitude }} {{ $item->longitude }}</td>
                                                     <td>
                                                         <a href="{{ route('modifierOLT', ['id' => $item->id]) }}"
                                                             class="btn btn-primary">Modifier</a>
