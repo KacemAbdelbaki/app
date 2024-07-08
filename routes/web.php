@@ -10,11 +10,9 @@ Route::get('/', function () {
 
 // OLT
 Route::get('/olts', [OLTController::class, 'getOLTs'])->name('olts');
-Route::get('/ajouterOLT', function () {
-    return view('/Admin/OLT/ajouterOLT');
-})->name('ajouterOLT');
+Route::get('/ajouterOLT', [OLTController::class, 'addOLT'])->name('ajouterOLT');
 Route::post('/oltS', [OLTController::class, 'storeOLT'])->name('olt.store');
-Route::post('/clientU', [OLTController::class, 'updateOLT'])->name('olt.update');
+Route::post('/oltU', [OLTController::class, 'updateOLT'])->name('olt.update');
 Route::get('/modifierOLT/{id}', [OLTController::class, 'getOLTId'])->name('modifierOLT');
 Route::get('/supprimerOLT/{id}', [OLTController::class, 'deleteOLT'])->name('supprimerOLT');
 

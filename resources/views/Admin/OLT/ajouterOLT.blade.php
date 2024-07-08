@@ -67,9 +67,16 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="coordonne" class="col-form-label col-lg-2">Coordonnées</label>
+                                            <label for="longitude" class="col-form-label col-lg-2">Coordonnées</label>
                                             <div class="col-lg-10">
-                                                <input id="coordonne" name="coordonne" type="text" class="form-control" placeholder="Entrer les coordonnées">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2 mb-md-0">
+                                                        <input id="longitude" name="longitude" type="float" class="form-control" placeholder="Longitude">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input id="latitude" name="latitude" type="float" class="form-control" placeholder="Latitude">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -99,21 +106,29 @@
                                         <div class="row mb-4">
                                             <label for="date_mise_service" class="col-form-label col-lg-2">Date de Mise en Service</label>
                                             <div class="col-lg-10">
-                                                <input id="date_mise_service" name="date_mise_service" type="date" class="form-control" placeholder="Entrer la date de mise en service">
+                                                <input id="date_mise_service" name="date_mise_service" type="datetime-local" class="form-control" placeholder="Entrer la date de mise en service">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="carte_id" class="col-form-label col-lg-2">Carte ID</label>
+                                            <label for="carte_id" class="col-form-label col-lg-2">Carte</label>
                                             <div class="col-lg-10">
-                                                <input id="carte_id" name="carte_id" type="text" class="form-control" placeholder="Entrer le carte ID">
+                                                <select id="carte_id" name="carte_id" class="form-control">
+                                                    @foreach ($cartes as $carte)
+                                                        <option value={{$carte->id}}>{{$carte->modele_carte}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="hub_id" class="col-form-label col-lg-2">Hub ID</label>
+                                            <label for="hub_id" class="col-form-label col-lg-2">Hub</label>
                                             <div class="col-lg-10">
-                                                <input id="hub_id" name="hub_id" type="text" class="form-control" placeholder="Entrer le hub ID">
+                                                <select id="hub_id" name="hub_id" class="form-control">
+                                                    @foreach ($hubs as $hub)
+                                                        <option value={{hub->id}}>{{hub->nom}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                        </div>
+                                        </div>                                        
                                         <div class="row justify-content-end">
                                             <div class="col-lg-10">
                                                 <button type="submit" class="btn btn-primary">Ajouter Carte</button>

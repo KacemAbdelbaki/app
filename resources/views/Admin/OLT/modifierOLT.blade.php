@@ -46,7 +46,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title mb-4">Ajouter Nouvelle Carte</h4>
-                                    <form action="{{ route('olt.store') }}" method="POST">
+                                    <form action="{{ route('olt.update') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $data->id }}">
                                         <div class="row mb-4">
@@ -74,9 +74,16 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="coordonne" class="col-form-label col-lg-2">Coordonnées</label>
+                                            <label for="longitude" class="col-form-label col-lg-2">Coordonnées</label>
                                             <div class="col-lg-10">
-                                                <input id="coordonne" name="coordonne" type="text" class="form-control" value="{{ $data->coordonne }}" placeholder="Entrer les coordonnées">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2 mb-md-0">
+                                                        <input id="longitude" name="longitude" type="float" value={{$data->longitude}} class="form-control" placeholder="Longitude">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input id="latitude" name="latitude" type="float" value={{$data->latitude}} class="form-control" placeholder="Latitude">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -100,25 +107,33 @@
                                         <div class="row mb-4">
                                             <label for="num_slot_board" class="col-form-label col-lg-2">Numéro de Slot Board</label>
                                             <div class="col-lg-10">
-                                                <input id="num_slot_board" name="num_slot_board" type="text" class="form-control" value="{{ $data->num_slot_board }}" placeholder="Entrer le numéro de slot board">
+                                                <input id="num_slot_board" name="num_slot_board" type="text" value={{$data->numero_slot_board}} class="form-control" value="{{ $data->num_slot_board }}" placeholder="Entrer le numéro de slot board">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="date_mise_service" class="col-form-label col-lg-2">Date de Mise en Service</label>
                                             <div class="col-lg-10">
-                                                <input id="date_mise_service" name="date_mise_service" type="date" class="form-control" value="{{ $data->date_mise_service }}" placeholder="Entrer la date de mise en service">
+                                                <input id="date_mise_service" name="date_mise_service" type="datetime-local" class="form-control" value="{{ $data->date_mise_service }}" placeholder="Entrer la date de mise en service">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="carte_id" class="col-form-label col-lg-2">Carte ID</label>
+                                            <label for="carte_id" class="col-form-label col-lg-2">Carte</label>
                                             <div class="col-lg-10">
-                                                <input id="carte_id" name="carte_id" type="text" class="form-control" value="{{ $data->carte_id }}" placeholder="Entrer le carte ID">
+                                                <select id="carte_id" name="carte_id" value={{$data->carte_id}} class="form-control">
+                                                    @foreach ($cartes as $carte)
+                                                        <option value={{$carte->id}}>{{$carte->modele_carte}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="hub_id" class="col-form-label col-lg-2">Hub ID</label>
+                                            <label for="hub_id" class="col-form-label col-lg-2">Hub</label>
                                             <div class="col-lg-10">
-                                                <input id="hub_id" name="hub_id" type="text" class="form-control" value="{{ $data->hub_id }}" placeholder="Entrer le hub ID">
+                                                <select id="hub_id" name="hub_id" value={{$data->hub_id}} class="form-control">
+                                                    @foreach ($hubs as $hub)
+                                                        <option value={{hub->id}}>{{hub->nom}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row justify-content-end">
