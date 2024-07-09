@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">Liste de livreur</h4>
+                                <h4 class="mb-sm-0 font-size-18">Liste des Hubs</h4>
                             </div>
                         </div>
                     </div>
@@ -60,41 +60,42 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h4 class="card-title">Vous pouvez supprimer ou modifier des informations concernant les Personnels</h4>
+                                    <h4 class="card-title">Vous pouvez supprimer ou modifier des informations concernant les Hubs</h4>
                                     <br />
                                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th>Nom</th>
-                                                <th>Prénom</th>
-                                                <th>E-mail</th>
-                                                <th>Numéro de téléphone</th>
+                                                <th>Numero Serie</th>
+                                                <th>Ports Affectés</th>
                                                 <th>Adresse</th>
-                                                <th>Poste</th>
-                                                <th>Date obtention</th>
+                                                <th>Nombre Des Chaine Actif</th>
+                                                <th>SubBox</th>
+                                                <th>Date Mise En Service</th>
+                                                <th>Coordonne</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
-
                                         <tbody>
-                                            {{-- @foreach ($data as $item)
+                                            @foreach ($data as $item)
                                                 <tr>
                                                     <td style="vertical-align: middle;">{{ $item->nom }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->prenom }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->email }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->num_tel }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->num_serie }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->ports_affecte }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->adresse }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->poste }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->date_obtention }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->nbr_chaine_actif }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->sub_box_id }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->date_mise_service }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->latitude }} {{ $item->longitude }}</td>
                                                     <td>
-                                                        <a href="{{ route('modifierPersonnel', ['id' => $item->id]) }}"
+                                                        <a href="{{ route('modifierHub', ['id' => $item->id]) }}"
                                                             class="btn btn-primary">Modifier</a>
-                                                        <a href="{{ route('supprimerPersonnel', ['id' => $item->id]) }}"
+                                                        <a href="{{ route('supprimerHub', ['id' => $item->id]) }}"
                                                             class="btn btn-danger">Supprimer </a>
                                                     </td>
                                                 </tr>
-                                            @endforeach --}}
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -114,8 +115,5 @@
             @include('Admin/layout/footer')
             <!-- Footer End -->
 </body>
-
-
-<!-- Mirrored from themesbrand.com/skote/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Aug 2022 09:51:50 GMT -->
 
 </html>

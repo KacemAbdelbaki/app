@@ -52,4 +52,3 @@ Route::post('/endBoxS', [EndBoxController::class, 'storeEndBox'])->name('endBox.
 Route::post('/endBoxU', [EndBoxController::class, 'updateEndBox'])->name('endBox.update');
 Route::get('/modifierEndBox/{id}', [EndBoxController::class, 'getEndBoxId'])->name('modifierEndBox');
 Route::get('/supprimerEndBox/{id}', [EndBoxController::class, 'deleteEndBox'])->name('supprimerEndBox');
-

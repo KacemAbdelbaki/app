@@ -107,7 +107,13 @@
                                         <div class="row mb-4">
                                             <label for="num_slot_board" class="col-form-label col-lg-2">Numéro de Slot Board</label>
                                             <div class="col-lg-10">
-                                                <input id="num_slot_board" name="num_slot_board" type="text" value={{$data->numero_slot_board}} class="form-control" value="{{ $data->num_slot_board }}" placeholder="Entrer le numéro de slot board">
+                                                <input id="num_slot_board" name="num_slot_board" type="text" value={{$data->numero_slot_board}} class="form-control" placeholder="Entrer le numéro de slot board">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="capacite_en_slot" class="col-form-label col-lg-2">Capacite En Slot</label>
+                                            <div class="col-lg-10">
+                                                <input id="capacite_en_slot" name="capacite_en_slot" type="number" value={{$data->capacite_en_slot}} class="form-control" placeholder="Entrer la capacite en slot">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -131,7 +137,7 @@
                                             <div class="col-lg-10">
                                                 <select id="hub_id" name="hub_id" value={{$data->hub_id}} class="form-control">
                                                     @foreach ($hubs as $hub)
-                                                        <option value={{hub->id}}>{{hub->nom}}</option>
+                                                        <option value={{$hub->id}}>{{$hub->nom}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

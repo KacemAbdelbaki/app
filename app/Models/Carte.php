@@ -10,5 +10,5 @@ class Carte extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'carte';
-    protected $fillable = ['id', 'modele_carte', 'num_ports'];
+    protected $fillable = ['id', 'modele_carte', 'nbr_ports', 'slot'];
 }

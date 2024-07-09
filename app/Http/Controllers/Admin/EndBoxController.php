@@ -4,87 +4,80 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Carte;
 use App\Models\Hub;
-use App\Models\OLT;
+use App\Models\EndBox;
+use App\Models\SubBox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class EndBoxController
 {
-    public function storeOLT(Request $request)
+    public function storeEndBox(Request $request)
     {
-        $olt = new OLT();
-        $olt->nom = $request->nom;
-        $olt->type = $request->type;
-        $olt->modele = $request->modele;
+        $endBox = new EndBox();
+        $endBox->nom = $request->nom;
+        $endBox->num_serie = $request->num_serie;
+        $endBox->modele = $request->modele;
         $longitude = $request->longitude;
         $latitude = $request->latitude;  
-        $olt->coordonne = DB::raw("POINT($longitude, $latitude)");
-        $olt->adresse = $request->adresse;
-        $olt->centrale_optique = $request->centrale_optique;
-        $olt->type_carte = $request->type_carte;
-        $olt->numero_slot_board = $request->num_slot_board;
-        $olt->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
-        $olt->carte_id = $request->carte_id;
-        $olt->hub_id = $request->hub_id;
-        $olt->save();
-        return redirect()->route('olts')->with('success', 'Formulaire soumis avec succès!');
+        $endBox->coordonne = DB::raw("POINT($longitude, $latitude)");
+        $endBox->adresse = $request->adresse;
+        $endBox->num_dans_chaine = $request->num_dans_chaine;
+        $endBox->sub_box_precedent_id = $request->sub_box_precedent_id; 
+        $endBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
+        $endBox->save();
+        return redirect()->route('endBoxs')->with('success', 'Formulaire soumis avec succès!');
     }
 
 
-    public function getOLTs()
+    public function getEndBoxs()
     {
-        $olts = OLT::select('*', 
+        $endBoxs = EndBox::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
         ->get();
-        return view('Admin/OLT/olt', ['data' => $olts]);
+        return view('Admin/EndBox/endBox', ['data' => $endBoxs]);
     }
     
-    public function addOLT()
+    public function addEndBox()
     {
-        $cartes = Carte::all();
-        $hubs = Hub::all();
-        return view('Admin/OLT/ajouterOLT', ['cartes' => $cartes, 'hubs' => $hubs]);
+        $subBoxs = SubBox::all();
+        return view('Admin/EndBox/ajouterEndBox', ['subBoxs' => $subBoxs]);
     }
 
-    public function getOLTId($id)
+    public function getEndBoxId($id)
     {
-        $olt = OLT::select('*', 
+        $endBox = EndBox::select('*', 
                DB::raw('ST_X(coordonne) as longitude'), 
                DB::raw('ST_Y(coordonne) as latitude'))
         ->where('id', $id)
         ->first();
-        $olt->date_mise_service = $olt->date_mise_service ? Carbon::parse($olt->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
-        $cartes = Carte::all();
-        $hubs = Hub::all();
-        return view('Admin/OLT/modifierOLT', ['data' => $olt, 'cartes' => $cartes, 'hubs' => $hubs]);
+        $endBox->date_mise_service = $endBox->date_mise_service ? Carbon::parse($endBox->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
+        $subBoxs = SubBox::all();
+        return view('Admin/EndBox/modifierEndBox', ['data' => $endBox, 'subBoxs' => $subBoxs]);
     }
 
-    public function deleteOLT($id)
+    public function deleteEndBox($id)
     {
-        $olt = OLT::find($id);
-        $olt->delete();
-        return redirect()->route('olts')->with('message', 'OLT a ete bien supprimé');
+        $endBox = EndBox::find($id);
+        $endBox->delete();
+        return redirect()->route('endBoxs')->with('message', 'EndBox a ete bien supprimé');
     }
 
-    public function updateOLT(Request $request)
+    public function updateEndBox(Request $request)
     {
-        $olt = OLT::find($request->id);
-        $olt->nom = $request->nom;
-        $olt->type = $request->type;
-        $olt->modele = $request->modele;
+        $endBox = EndBox::find($request->id);
+        $endBox->nom = $request->nom;
+        $endBox->num_serie = $request->num_serie;
+        $endBox->modele = $request->modele;
         $longitude = $request->longitude;
         $latitude = $request->latitude;  
-        $olt->coordonne = DB::raw("POINT($longitude, $latitude)");
-        $olt->adresse = $request->adresse;
-        $olt->centrale_optique = $request->centrale_optique;
-        $olt->type_carte = $request->type_carte;
-        $olt->numero_slot_board = $request->num_slot_board;
-        $olt->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
-        $olt->carte_id = $request->carte_id;
-        $olt->hub_id = $request->hub_id;
-        $olt->update();
-        return redirect()->route('olts')->with('message', 'OLT a ete bien modifié');
+        $endBox->coordonne = DB::raw("POINT($longitude, $latitude)");
+        $endBox->adresse = $request->adresse;
+        $endBox->num_dans_chaine = $request->num_dans_chaine;
+        $endBox->sub_box_precedent_id = $request->sub_box_precedent_id; 
+        $endBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
+        $endBox->update();
+        return redirect()->route('endBoxs')->with('message', 'EndBox a ete bien modifié');
     }
 }

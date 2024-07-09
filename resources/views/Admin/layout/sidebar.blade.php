@@ -35,8 +35,8 @@
                         <span key="t-ui-elements">Hub</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('hubs')}}" key="t-alerts">Ajouter un Hub</a></li>
-                        <li><a href="{{route('ajouterHub')}}" key="t-buttons">Liste des Hubs</a></li>
+                        <li><a href="{{route('hubs')}}" key="t-alerts">Liste des Hub</a></li>
+                        <li><a href="{{route('ajouterHub')}}" key="t-buttons">Ajouter un Hubs</a></li>
                     </ul>
                 </li>
                 
@@ -46,8 +46,8 @@
                         <span key="t-ui-elements">SubBox</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('subBoxs')}}" key="t-alerts">Ajouter un SubBox</a></li>
-                        <li><a href="{{route('ajouterSubBox')}}" key="t-buttons">Liste des SubBoxs</a></li>
+                        <li><a href="{{route('subBoxs')}}" key="t-alerts">Liste des SubBox</a></li>
+                        <li><a href="{{route('ajouterSubBox')}}" key="t-buttons">Ajouter un SubBoxs</a></li>
                     </ul>
                 </li>
                 
@@ -57,8 +57,8 @@
                         <span key="t-ui-elements">EndBox</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('endBoxs')}}" key="t-alerts">Ajouter un EndBox</a></li>
-                        <li><a href="{{route('ajouterEndBox')}}" key="t-buttons">Liste des EndBoxs</a></li>
+                        <li><a href="{{route('endBoxs')}}" key="t-alerts">Liste des EndBox</a></li>
+                        <li><a href="{{route('ajouterEndBox')}}" key="t-buttons">Ajouter un EndBoxs</a></li>
                     </ul>
                 </li>
 

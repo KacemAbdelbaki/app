@@ -2,89 +2,80 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Carte;
 use App\Models\Hub;
-use App\Models\OLT;
+use App\Models\SubBox;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class HubController
 {
-    public function storeOLT(Request $request)
+    public function storeHub(Request $request)
     {
-        $olt = new OLT();
-        $olt->nom = $request->nom;
-        $olt->type = $request->type;
-        $olt->modele = $request->modele;
+        $hub = new Hub();
+        $hub->nom = $request->nom;
+        $hub->num_serie = $request->num_serie;
+        $hub->ports_affecte = $request->ports_affecte;
         $longitude = $request->longitude;
         $latitude = $request->latitude;  
-        $olt->coordonne = DB::raw("POINT($longitude, $latitude)");
-        $olt->adresse = $request->adresse;
-        $olt->centrale_optique = $request->centrale_optique;
-        $olt->type_carte = $request->type_carte;
-        $olt->numero_slot_board = $request->num_slot_board;
-        $olt->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
-        $olt->carte_id = $request->carte_id;
-        $olt->hub_id = $request->hub_id;
-        $olt->save();
-        return redirect()->route('olts')->with('success', 'Formulaire soumis avec succès!');
+        $hub->coordonne = DB::raw("POINT($longitude, $latitude)");
+        $hub->adresse = $request->adresse;
+        $hub->nbr_chaine_actif = $request->nbr_chaine_actif;
+        $hub->sub_box_id = $request->sub_box_id;    
+        $hub->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
+        $hub->save();
+        return redirect()->route('hubs')->with('success', 'Formulaire soumis avec succès!');
     }
 
 
-    public function getOLTs()
+    public function getHubs()
     {
-        $olts = OLT::select('*', 
+        $hubs = Hub::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
         ->get();
-        return view('Admin/OLT/olt', ['data' => $olts]);
+        return view('Admin/Hub/hub', ['data' => $hubs]);
     }
     
-    public function addOLT()
+    public function addHub()
     {
-        $cartes = Carte::all();
-        $hubs = Hub::all();
-        return view('Admin/OLT/ajouterOLT', ['cartes' => $cartes, 'hubs' => $hubs]);
+        $subBoxs = SubBox::all();
+        return view('Admin/Hub/ajouterHub', ['subBoxs' => $subBoxs]);
     }
 
-    public function getOLTId($id)
+    public function getHubId($id)
     {
-        $olt = OLT::select('*', 
+        $hub = Hub::select('*', 
                DB::raw('ST_X(coordonne) as longitude'), 
                DB::raw('ST_Y(coordonne) as latitude'))
         ->where('id', $id)
         ->first();
-        $olt->date_mise_service = $olt->date_mise_service ? Carbon::parse($olt->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
-        $cartes = Carte::all();
-        $hubs = Hub::all();
-        return view('Admin/OLT/modifierOLT', ['data' => $olt, 'cartes' => $cartes, 'hubs' => $hubs]);
+        $hub->date_mise_service = $hub->date_mise_service ? Carbon::parse($hub->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
+        $subBoxs = SubBox::all();
+        return view('Admin/Hub/modifierHub', ['data' => $hub, 'subBoxs' => $subBoxs]);
     }
 
-    public function deleteOLT($id)
+    public function deleteHub($id)
     {
-        $olt = OLT::find($id);
-        $olt->delete();
-        return redirect()->route('olts')->with('message', 'OLT a ete bien supprimé');
+        $hub = Hub::find($id);
+        $hub->delete();
+        return redirect()->route('hubs')->with('message', 'Hub a ete bien supprimé');
     }
 
-    public function updateOLT(Request $request)
+    public function updateHub(Request $request)
     {
-        $olt = OLT::find($request->id);
-        $olt->nom = $request->nom;
-        $olt->type = $request->type;
-        $olt->modele = $request->modele;
+        $hub = Hub::find($request->id);
+        $hub->nom = $request->nom;
+        $hub->num_serie = $request->num_serie;
+        $hub->ports_affecte = $request->ports_affecte;
         $longitude = $request->longitude;
         $latitude = $request->latitude;  
-        $olt->coordonne = DB::raw("POINT($longitude, $latitude)");
-        $olt->adresse = $request->adresse;
-        $olt->centrale_optique = $request->centrale_optique;
-        $olt->type_carte = $request->type_carte;
-        $olt->numero_slot_board = $request->num_slot_board;
-        $olt->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
-        $olt->carte_id = $request->carte_id;
-        $olt->hub_id = $request->hub_id;
-        $olt->update();
-        return redirect()->route('olts')->with('message', 'OLT a ete bien modifié');
+        $hub->coordonne = DB::raw("POINT($longitude, $latitude)");
+        $hub->adresse = $request->adresse;
+        $hub->nbr_chaine_actif = $request->nbr_chaine_actif;
+        $hub->sub_box_id = $request->sub_box_id;    
+        $hub->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
+        $hub->update();
+        return redirect()->route('hubs')->with('message', 'Hub a ete bien modifié');
     }
 }

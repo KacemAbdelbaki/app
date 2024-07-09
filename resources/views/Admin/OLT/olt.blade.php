@@ -71,6 +71,7 @@
                                                 <th>Adresse</th>
                                                 <th>Type Carte</th>
                                                 <th>Numero Slot Board</th>
+                                                <th>Capacité En Slot</th>
                                                 <th>Date Mise En Service</th>
                                                 <th>Carte</th>
                                                 <th>Hub</th>
@@ -88,6 +89,7 @@
                                                     <td style="vertical-align: middle;">{{ $item->adresse }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->type_carte }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->numero_slot_board }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->capacite_en_slot }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->date_mise_service }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->carte_id }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->hub_id }}</td>

@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">Ajouter Nouveau</h4>
+                                <h4 class="mb-sm-0 font-size-18">Modifier</h4>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title mb-4">Ajouter Nouvelle Carte</h4>
+                                    <h4 class="card-title mb-4">Modifier Carte</h4>
                                     <form action="{{ route('carte.update') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $data->id }}">
