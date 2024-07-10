@@ -92,15 +92,15 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="type_carte" class="col-form-label col-lg-2">Type de Carte</label>
-                                            <div class="col-lg-10">
-                                                <input id="type_carte" name="type_carte" type="text" class="form-control" placeholder="Entrer le type de carte">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
                                             <label for="num_slot_board" class="col-form-label col-lg-2">Numéro de Slot Board</label>
                                             <div class="col-lg-10">
                                                 <input id="num_slot_board" name="num_slot_board" type="text" class="form-control" placeholder="Entrer le numéro de slot board">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="capacite_en_port" class="col-form-label col-lg-2">Capacite En Port</label>
+                                            <div class="col-lg-10">
+                                                <input id="capacite_en_port" name="capacite_en_port" type="text" class="form-control" placeholder="Entrer le numéro de slot board">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -124,7 +124,7 @@
                                             <div class="col-lg-10">
                                                 <select id="hub_id" name="hub_id" class="form-control">
                                                     @foreach ($hubs as $hub)
-                                                        <option value={{hub->id}}>{{hub->nom}}</option>
+                                                        <option value={{$hub->id}}>{{$hub->nom}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

@@ -56,14 +56,20 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="num_ports" class="col-form-label col-lg-2">Numero ports</label>
+                                            <label for="nbr_ports" class="col-form-label col-lg-2">Nombre ports</label>
                                             <div class="col-lg-10">
-                                                <input id="num_ports" name="num_ports" type="number" value="{{ $data->num_ports }}" class="form-control" placeholder="Entrer le numero des ports">
+                                                <input id="nbr_ports" name="nbr_ports" value="{{$data->nbr_ports}}" type="number" class="form-control" placeholder="Entrer le nombre des ports">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="slot" class="col-form-label col-lg-2">Numero slot</label>
+                                            <div class="col-lg-10">
+                                                <input id="slot" name="slot" value="{{$data->slot}}" type="number" class="form-control" placeholder="Entrer le numero du slot">
                                             </div>
                                         </div>
                                         <div class="row justify-content-end">
                                             <div class="col-lg-10">
-                                                <button type="submit" class="btn btn-primary">Ajouter Carte</button>
+                                                <button type="submit" class="btn btn-primary">Modifier Carte</button>
                                             </div>
                                         </div>
                                     </form>

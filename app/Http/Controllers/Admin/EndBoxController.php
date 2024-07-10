@@ -22,6 +22,7 @@ class EndBoxController
         $latitude = $request->latitude;  
         $endBox->coordonne = DB::raw("POINT($longitude, $latitude)");
         $endBox->adresse = $request->adresse;
+        $endBox->installation = $request->installation;
         $endBox->num_dans_chaine = $request->num_dans_chaine;
         $endBox->sub_box_precedent_id = $request->sub_box_precedent_id; 
         $endBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
@@ -35,6 +36,7 @@ class EndBoxController
         $endBoxs = EndBox::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
+        ->with('subBox')
         ->get();
         return view('Admin/EndBox/endBox', ['data' => $endBoxs]);
     }
@@ -74,6 +76,7 @@ class EndBoxController
         $latitude = $request->latitude;  
         $endBox->coordonne = DB::raw("POINT($longitude, $latitude)");
         $endBox->adresse = $request->adresse;
+        $endBox->installation = $request->installation;
         $endBox->num_dans_chaine = $request->num_dans_chaine;
         $endBox->sub_box_precedent_id = $request->sub_box_precedent_id; 
         $endBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');

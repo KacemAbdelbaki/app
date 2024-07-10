@@ -66,7 +66,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Modele Carte</th>
-                                                <th>Numero Ports</th>
+                                                <th>Nombre Ports</th>
+                                                <th>Slot</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -76,7 +77,8 @@
                                             @foreach ($data as $item)
                                                 <tr>
                                                     <td style="vertical-align: middle;">{{ $item->modele_carte }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->num_ports }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->nbr_ports }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->slot }}</td>
                                                     <td>
                                                         <a href="{{ route('modifierCarte', ['id' => $item->id]) }}"
                                                             class="btn btn-primary">Modifier</a>
@@ -92,20 +94,13 @@
                             </div>
                         </div> <!-- end col -->
                     </div> <!-- end row -->
-
-
-
                 </div> <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
-
 
             <!-- ========== Footer Start ========== -->
             @include('Admin/layout/footer')
             <!-- Footer End -->
 </body>
-
-
-<!-- Mirrored from themesbrand.com/skote/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Aug 2022 09:51:50 GMT -->
 
 </html>

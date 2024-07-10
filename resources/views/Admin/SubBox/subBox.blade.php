@@ -68,6 +68,7 @@
                                                 <th>Nom</th>
                                                 <th>Numero Serie</th>
                                                 <th>Modele</th>
+                                                <th>Installation</th>
                                                 <th>Numero Dans La Chaine</th>
                                                 <th>SubBox Swuivant</th>
                                                 <th>EndBox Swuivant</th>
@@ -84,9 +85,10 @@
                                                     <td style="vertical-align: middle;">{{ $item->nom }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->num_serie }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->modele }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->installation }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->num_dans_chaine }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->sub_box_suivant_id }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->end_box_id }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->subBox->nom ?? '---' }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->endBox->nom ?? '---' }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->date_mise_service }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->adresse }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->latitude }} {{ $item->longitude }}</td>

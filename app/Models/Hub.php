@@ -11,4 +11,8 @@ class Hub extends Model
     public $timestamps = false;
     protected $table = 'hub';
     protected $fillable = ['id', 'nom', 'modele', 'num_serie', 'installation', 'coordonne', 'adresse', 'ports_affecte', 'nbr_chaine_actif', 'date_mise_service', 'sub_box_id'];
+
+    public function subBox(){
+        return $this->belongsTo(SubBox::class, 'sub_box_id');
+    }
 }

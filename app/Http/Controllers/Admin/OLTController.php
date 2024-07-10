@@ -22,11 +22,11 @@ class OLTController
         $olt->coordonne = DB::raw("POINT($longitude, $latitude)");
         $olt->adresse = $request->adresse;
         $olt->centrale_optique = $request->centrale_optique;
-        $olt->type_carte = $request->type_carte;
         $olt->numero_slot_board = $request->num_slot_board;
         $olt->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
-        $olt->carte_id = $request->carte_id;
         $olt->hub_id = $request->hub_id;
+        $olt->capacite_en_port = $request->capacite_en_port;
+        $olt->cartes()->attach($request->carte_id);
         $olt->save();
         return redirect()->route('olts')->with('success', 'Formulaire soumis avec succès!');
     }
@@ -37,6 +37,8 @@ class OLTController
         $olts = OLT::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
+        ->with('cartes')
+        ->with('hub')
         ->get();
         return view('Admin/OLT/olt', ['data' => $olts]);
     }
@@ -79,11 +81,11 @@ class OLTController
         $olt->coordonne = DB::raw("POINT($longitude, $latitude)");
         $olt->adresse = $request->adresse;
         $olt->centrale_optique = $request->centrale_optique;
-        $olt->type_carte = $request->type_carte;
         $olt->numero_slot_board = $request->num_slot_board;
         $olt->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
-        $olt->carte_id = $request->carte_id;
         $olt->hub_id = $request->hub_id;
+        $olt->capacite_en_port = $request->capacite_en_port;
+        $olt->cartes()->attach($request->carte_id);
         $olt->update();
         return redirect()->route('olts')->with('message', 'OLT a ete bien modifié');
     }

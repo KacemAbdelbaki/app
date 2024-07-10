@@ -11,4 +11,8 @@ class EndBox extends Model
     public $timestamps = false;
     protected $table = 'end_box';
     protected $fillable = ['id', 'nom', 'installation', 'num_serie', 'modele', 'coordonne', 'adresse', 'num_dans_chaine', 'date_mise_service', 'sub_box_precedent_id'];
+
+    public function subBox(){
+        return $this->belongsTo(SubBox::class, 'sub_box_precedent_id');
+    }
 }

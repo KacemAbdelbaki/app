@@ -25,6 +25,7 @@ class SubBoxController
         $subBox->num_dans_chaine = $request->num_dans_chaine;
         $subBox->sub_box_suivant_id = $request->sub_box_suivant_id;    
         $subBox->end_box_id = $request->end_box_id;    
+        $subBox->installation = $request->installation;
         $subBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
         $subBox->save();
         return redirect()->route('subBoxs')->with('success', 'Formulaire soumis avec succès!');
@@ -36,6 +37,8 @@ class SubBoxController
         $subBoxs = SubBox::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
+        ->with('subBox')
+        ->with('endBox')
         ->get();
         return view('Admin/SubBox/subBox', ['data' => $subBoxs]);
     }
@@ -81,6 +84,7 @@ class SubBoxController
         $subBox->num_dans_chaine = $request->num_dans_chaine;
         $subBox->sub_box_suivant_id = $request->sub_box_suivant_id;    
         $subBox->end_box_id = $request->end_box_id;    
+        $subBox->installation = $request->installation;
         $subBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
         $subBox->update();
         return redirect()->route('subBoxs')->with('message', 'SubBox a ete bien modifié');

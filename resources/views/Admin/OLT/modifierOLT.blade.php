@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">Ajouter Nouveau</h4>
+                                <h4 class="mb-sm-0 font-size-18">Modifier</h4>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title mb-4">Ajouter Nouvelle Carte</h4>
+                                    <h4 class="card-title mb-4">Modifier OLT</h4>
                                     <form action="{{ route('olt.update') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $data->id }}">
@@ -111,9 +111,15 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
+                                            <label for="capacite_en_port" class="col-form-label col-lg-2">Capacite En Port</label>
+                                            <div class="col-lg-10">
+                                                <input id="capacite_en_port" name="capacite_en_port" type="text" value="{{$data->capacite_en_port}}" class="form-control" placeholder="Entrer le numéro de slot board">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
                                             <label for="capacite_en_slot" class="col-form-label col-lg-2">Capacite En Slot</label>
                                             <div class="col-lg-10">
-                                                <input id="capacite_en_slot" name="capacite_en_slot" type="number" value={{$data->capacite_en_slot}} class="form-control" placeholder="Entrer la capacite en slot">
+                                                <input id="capacite_en_slot" name="capacite_en_slot" type="number" value="{{$data->capacite_en_slot}}" class="form-control" placeholder="Entrer la capacite en slot">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -125,7 +131,7 @@
                                         <div class="row mb-4">
                                             <label for="carte_id" class="col-form-label col-lg-2">Carte</label>
                                             <div class="col-lg-10">
-                                                <select id="carte_id" name="carte_id" value={{$data->carte_id}} class="form-control">
+                                                <select id="carte_id" name="carte_id" value="{{$data->carte_id}}" class="form-control">
                                                     @foreach ($cartes as $carte)
                                                         <option value={{$carte->id}}>{{$carte->modele_carte}}</option>
                                                     @endforeach
@@ -135,7 +141,7 @@
                                         <div class="row mb-4">
                                             <label for="hub_id" class="col-form-label col-lg-2">Hub</label>
                                             <div class="col-lg-10">
-                                                <select id="hub_id" name="hub_id" value={{$data->hub_id}} class="form-control">
+                                                <select id="hub_id" name="hub_id" value="{{$data->hub_id}}" class="form-control">
                                                     @foreach ($hubs as $hub)
                                                         <option value={{$hub->id}}>{{$hub->nom}}</option>
                                                     @endforeach
@@ -144,7 +150,7 @@
                                         </div>
                                         <div class="row justify-content-end">
                                             <div class="col-lg-10">
-                                                <button type="submit" class="btn btn-primary">Ajouter Carte</button>
+                                                <button type="submit" class="btn btn-primary">Modifier OLT</button>
                                             </div>
                                         </div>
                                     </form>

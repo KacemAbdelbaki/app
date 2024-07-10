@@ -62,6 +62,12 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
+                                            <label for="modele" class="col-form-label col-lg-2">Modèle</label>
+                                            <div class="col-lg-10">
+                                                <input id="modele" name="modele" value="{{ $data->modele }}" type="text" class="form-control" placeholder="Entrer le modèle">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
                                             <label for="ports_affecte" class="col-form-label col-lg-2">Ports Affectes</label>
                                             <div class="col-lg-10">
                                                 <input id="ports_affecte" name="ports_affecte" value="{{ $data->ports_affecte }}" type="text" class="form-control" placeholder="Entrer les ports affectes">
@@ -107,7 +113,16 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>                                      
+                                        </div>      
+                                        <div class="row mb-4">
+                                            <label for="installation" class="col-form-label col-lg-2">Installation</label>
+                                            <div class="col-lg-10">
+                                                <select id="installation" name="installation" value="{{ $data->installation }}" class="form-control">
+                                                        <option value="Aérien">Aérien</option>
+                                                        <option value="Sousterrain">Sousterrain</option>
+                                                </select>
+                                            </div>
+                                        </div>                                 
                                         <div class="row justify-content-end">
                                             <div class="col-lg-10">
                                                 <button type="submit" class="btn btn-primary">Ajouter Hub</button>

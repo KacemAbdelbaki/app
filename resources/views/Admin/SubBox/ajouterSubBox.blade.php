@@ -69,13 +69,14 @@
                                         <div class="row mb-4">
                                             <label for="num_dans_chaine" class="col-form-label col-lg-2">Numero Dans La Chaine</label>
                                             <div class="col-lg-10">
-                                                <input id="num_dans_chaine" name="num_dans_chaine" type="text" class="form-control" placeholder="Entrer l'adresse">
+                                                <input id="num_dans_chaine" name="num_dans_chaine" type="text" class="form-control" placeholder="Entrer le numero dans la chaine">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="sub_box_suivant_id" class="col-form-label col-lg-2">SubBox</label>
                                             <div class="col-lg-10">
                                                 <select id="sub_box_suivant_id" name="sub_box_suivant_id" class="form-control">
+                                                    <option value="">-- Selectionner SubBox --</option>
                                                     @foreach ($subBoxs as $subBox)
                                                     <option value={{$subBox->id}}>{{$subBox->nom}}</option>
                                                     @endforeach
@@ -86,9 +87,19 @@
                                             <label for="end_box_id" class="col-form-label col-lg-2">EndBox</label>
                                             <div class="col-lg-10">
                                                 <select id="end_box_id" name="end_box_id" class="form-control">
+                                                    <option value="">-- Selectionner EndBox --</option>
                                                     @foreach ($endBoxs as $endBox)
                                                     <option value={{$endBox->id}}>{{$endBox->nom}}</option>
                                                     @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="installation" class="col-form-label col-lg-2">Installation</label>
+                                            <div class="col-lg-10">
+                                                <select id="installation" name="installation" class="form-control">
+                                                    <option value="Façade">Façade</option>
+                                                    <option value="Poteau">Poteau</option>
                                                 </select>
                                             </div>
                                         </div>

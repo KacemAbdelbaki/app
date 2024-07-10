@@ -61,6 +61,12 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
+                                            <label for="modele" class="col-form-label col-lg-2">Modèle</label>
+                                            <div class="col-lg-10">
+                                                <input id="modele" name="modele" type="text" class="form-control" placeholder="Entrer le modèle">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
                                             <label for="ports_affecte" class="col-form-label col-lg-2">Ports Affectes</label>
                                             <div class="col-lg-10">
                                                 <input id="ports_affecte" name="ports_affecte" type="text" class="form-control" placeholder="Entrer les ports affectes">
@@ -104,6 +110,15 @@
                                                     @foreach ($subBoxs as $subBox)
                                                         <option value={{$subBox->id}}>{{$subBox->nom}}</option>
                                                     @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="installation" class="col-form-label col-lg-2">Installation</label>
+                                            <div class="col-lg-10">
+                                                <select id="installation" name="installation" class="form-control">
+                                                        <option value="Aérien">Aérien</option>
+                                                        <option value="Sousterrain">Sousterrain</option>
                                                 </select>
                                             </div>
                                         </div>                                      

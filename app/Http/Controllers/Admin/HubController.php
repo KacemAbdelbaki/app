@@ -15,14 +15,16 @@ class HubController
         $hub = new Hub();
         $hub->nom = $request->nom;
         $hub->num_serie = $request->num_serie;
+        $hub->modele = $request->modele;
         $hub->ports_affecte = $request->ports_affecte;
         $longitude = $request->longitude;
         $latitude = $request->latitude;  
         $hub->coordonne = DB::raw("POINT($longitude, $latitude)");
         $hub->adresse = $request->adresse;
         $hub->nbr_chaine_actif = $request->nbr_chaine_actif;
-        $hub->sub_box_id = $request->sub_box_id;    
+        $hub->sub_box_id = $request->sub_box_id;   
         $hub->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
+        $hub->installation = $request->installation; 
         $hub->save();
         return redirect()->route('hubs')->with('success', 'Formulaire soumis avec succès!');
     }
@@ -33,6 +35,7 @@ class HubController
         $hubs = Hub::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
+        ->with('subBox')
         ->get();
         return view('Admin/Hub/hub', ['data' => $hubs]);
     }
@@ -67,14 +70,16 @@ class HubController
         $hub = Hub::find($request->id);
         $hub->nom = $request->nom;
         $hub->num_serie = $request->num_serie;
+        $hub->modele = $request->modele;
         $hub->ports_affecte = $request->ports_affecte;
         $longitude = $request->longitude;
         $latitude = $request->latitude;  
         $hub->coordonne = DB::raw("POINT($longitude, $latitude)");
         $hub->adresse = $request->adresse;
         $hub->nbr_chaine_actif = $request->nbr_chaine_actif;
-        $hub->sub_box_id = $request->sub_box_id;    
+        $hub->sub_box_id = $request->sub_box_id;   
         $hub->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
+        $hub->installation = $request->installation;
         $hub->update();
         return redirect()->route('hubs')->with('message', 'Hub a ete bien modifié');
     }

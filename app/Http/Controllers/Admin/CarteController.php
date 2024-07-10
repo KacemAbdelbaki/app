@@ -12,7 +12,8 @@ class CarteController
         $carte = new Carte();
 
         $carte->modele_carte = $request->modele_carte;
-        $carte->num_ports = $request->num_ports;
+        $carte->nbr_ports = $request->nbr_ports;
+        $carte->slot = $request->slot;
         $carte->save();
         return redirect()->route('cartes')->with('success', 'Formulaire soumis avec succès!');
     }
@@ -37,7 +38,8 @@ class CarteController
     public function updateCarte(Request $request){
         $carte = Carte::find($request->id);
         $carte->modele_carte = $request->modele_carte;
-        $carte->num_ports = $request->num_ports;
+        $carte->nbr_ports = $request->nbr_ports;
+        $carte->slot = $request->slot;
         $carte->update();
         return redirect()->route('cartes')->with('message', 'Carte a ete bien modifié');
     }

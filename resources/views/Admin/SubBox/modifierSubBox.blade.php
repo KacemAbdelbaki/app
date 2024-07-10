@@ -76,7 +76,8 @@
                                         <div class="row mb-4">
                                             <label for="sub_box_suivant_id" class="col-form-label col-lg-2">SubBox</label>
                                             <div class="col-lg-10">
-                                                <select id="sub_box_suivant_id" name="sub_box_suivant_id" value={{$data->sub_box_suivant_id}} class="form-control">
+                                                <select id="sub_box_suivant_id" name="sub_box_suivant_id" value="{{$data->sub_box_suivant_id}}" class="form-control">
+                                                    <option value="">-- Selectionner SubBox --</option>
                                                     @foreach ($subBoxs as $subBox)
                                                         <option value="{{$subBox->id}}">{{$subBox->nom}}</option>
                                                     @endforeach
@@ -86,10 +87,20 @@
                                         <div class="row mb-4">
                                             <label for="end_box_id" class="col-form-label col-lg-2">EndBox</label>
                                             <div class="col-lg-10">
-                                                <select id="end_box_id" name="end_box_id" value={{$data->end_box_id}} class="form-control">
+                                                <select id="end_box_id" name="end_box_id" value="{{$data->end_box_id}}" class="form-control">
+                                                    <option value="">-- Selectionner EndBox --</option>
                                                     @foreach ($endBoxs as $endBox)
                                                         <option value="{{$endBox->id}}">{{$endBox->nom}}</option>
                                                     @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <label for="installation" class="col-form-label col-lg-2">Installation</label>
+                                            <div class="col-lg-10">
+                                                <select id="installation" name="installation" value="{{ $data->installation }}" class="form-control">
+                                                    <option value="Façade">Façade</option>
+                                                    <option value="Poteau">Poteau</option>
                                                 </select>
                                             </div>
                                         </div>
