@@ -2,14 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CarteController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OLTController;
 use App\Http\Controllers\Admin\HubController;
 use App\Http\Controllers\Admin\SubBoxController;
 use App\Http\Controllers\Admin\EndBoxController;
 
-Route::get('/', function () {
-    return view('/Admin/dashboard');
-});
+Route::get('/', [DashboardController::class, 'getAll'])->name('adminHome');
 
 // OLT
 Route::get('/olts', [OLTController::class, 'getOLTs'])->name('olts');
