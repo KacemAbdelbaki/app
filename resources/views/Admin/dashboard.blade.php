@@ -94,10 +94,10 @@
                                                         <i data-toggle="popover" title="<strong>Hub</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $chaine['hub']->nom }}" class="fab fa-hubspot equipment-icon"></i>
                                                         <i class="fas fa-arrow-right arrow-icon"></i>
                                                         @foreach ($chaine['subBoxs'] as $subBox)
-                                                            <i data-toggle="popover" title="<strong>SubBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $subBox->nom }}" class="fas fa-box equipment-icon"></i>
+                                                            <i data-toggle="popover" title="<strong>SubBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $subBox->nom }}" class="fas fa-boxes equipment-icon"></i>
                                                             <i class="fas fa-arrow-right arrow-icon"></i>
                                                         @endforeach
-                                                        <i data-toggle="popover" title="<strong>EndBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $chaine['endBox']->nom }}" class="fas fa-stop equipment-icon"></i>
+                                                        <i data-toggle="popover" title="<strong>EndBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $chaine['endBox']->nom }}" class="fas fa-box equipment-icon"></i>
                                                     </div>
                                                 @endforeach
                                             </div>
