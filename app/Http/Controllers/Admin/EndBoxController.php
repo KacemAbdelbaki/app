@@ -24,7 +24,7 @@ class EndBoxController
         $endBox->adresse = $request->adresse;
         $endBox->installation = $request->installation;
         $endBox->num_dans_chaine = $request->num_dans_chaine;
-        $endBox->sub_box_precedent_id = $request->sub_box_precedent_id; 
+        // $endBox->sub_box_precedent_id = $request->sub_box_precedent_id; 
         $endBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
         $endBox->save();
         return redirect()->route('endBoxs')->with('success', 'Formulaire soumis avec succès!');

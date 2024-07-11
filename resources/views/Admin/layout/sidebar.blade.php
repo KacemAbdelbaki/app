@@ -72,16 +72,18 @@
 
 
 <!-- JAVASCRIPT -->
-<script src="{{ asset('libs/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('libs/metismenu/metisMenu.min.js') }}"></script>
-<script src="{{ asset('libs/simplebar/simplebar.min.js') }}"></script>
-
-<!-- apexcharts -->
-<script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>
-
-<!-- dashboard init -->
-<script src="{{ asset('js/pages/dashboard.init.js') }}"></script>
-
-<!-- App js -->
-<script src="{{ asset('js/app.js') }}"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Popper.js (required for Bootstrap tooltips and popovers) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <!-- Bootstrap JS (using CDN for better performance) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- MetisMenu -->
+    <script src="{{ asset('libs/metismenu/metisMenu.min.js') }}"></script>
+    <!-- SimpleBar -->
+    <script src="{{ asset('libs/simplebar/simplebar.min.js') }}"></script>
+    <!-- ApexCharts (if you're using charts) -->
+    <script src="{{ asset('libs/apexcharts/apexcharts.min.js') }}"></script>
+    <!-- Custom Scripts -->
+    <script src="{{ asset('js/pages/dashboard.init.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>

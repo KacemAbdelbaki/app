@@ -26,8 +26,8 @@ class OLTController
         $olt->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
         $olt->hub_id = $request->hub_id;
         $olt->capacite_en_port = $request->capacite_en_port;
-        $olt->cartes()->attach($request->carte_id);
         $olt->save();
+        $olt->cartes()->attach($request->carte_id);
         return redirect()->route('olts')->with('success', 'Formulaire soumis avec succès!');
     }
 

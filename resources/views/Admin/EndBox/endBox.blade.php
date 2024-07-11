@@ -77,7 +77,7 @@
                                                     <td style="vertical-align: middle;">{{ $item->num_serie }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->modele }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->num_dans_chaine }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->subBox->nom }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->subBox->nom ?? '---' }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->date_mise_service }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->adresse }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->latitude }} {{ $item->longitude }}</td>
