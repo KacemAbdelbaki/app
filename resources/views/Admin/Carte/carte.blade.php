@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">Liste de livreur</h4>
+                                <h4 class="mb-sm-0 font-size-18">Liste des Cartes</h4>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <h4 class="card-title">Vous pouvez supprimer ou modifier des informations concernant les Personnels</h4>
+                                    <h4 class="card-title">Vous pouvez supprimer ou modifier des informations concernant les Cartes</h4>
                                     <br />
                                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                         <thead>

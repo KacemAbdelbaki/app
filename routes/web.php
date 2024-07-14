@@ -20,7 +20,7 @@ Route::get('/supprimerOLT/{id}', [OLTController::class, 'deleteOLT'])->name('sup
 // Carte
 Route::get('/cartes', [CarteController::class, 'getCartes'])->name('cartes');
 Route::get('/ajouterCarte', function () {
-    return view('/Admin/Carte/ajouterCarte');
+    return view('/Admin/Carte/ajouterCarte',['page' => 'cartes']);
 })->name('ajouterCarte');
 Route::post('/carteS', [CarteController::class, 'storeCarte'])->name('carte.store');
 Route::post('/clientU', [CarteController::class, 'updateCarte'])->name('carte.update');
