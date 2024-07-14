@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\SubBoxController;
 use App\Http\Controllers\Admin\EndBoxController;
 
 Route::get('/', [DashboardController::class, 'getAll'])->name('adminHome');
-
 // OLT
 Route::get('/olts', [OLTController::class, 'getOLTs'])->name('olts');
 Route::get('/ajouterOLT', [OLTController::class, 'addOLT'])->name('ajouterOLT');

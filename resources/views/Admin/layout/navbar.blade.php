@@ -27,10 +27,10 @@
             </button>
 
             <!-- App Search-->
-            <form class="app-search d-none d-lg-block">
+            <form class="app-search d-none d-lg-block" action="{{ route($page) }}">
                 <div class="position-relative">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <span class="bx bx-search-alt"></span>
+                    <input name="searchInput" type="text" class="form-control" placeholder="Search...">
+                    <span class="bx bx-search-alt"></span> {{ $searchInput ?? '--' }}
                 </div>
             </form>
 
@@ -153,17 +153,9 @@
                                         </li>
                                     </ul>
                                 </div>
-
-                                <div class="col-sm-5">
-                                    <div>
-                                        <img src=" {{ asset('images/megamenu-img.png') }}" alt=""
-                                            class="img-fluid mx-auto d-block">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -194,7 +186,7 @@
                 </div>
             </div>
 
-            <div align="right" width="20%">
+            <div width="20%">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src=" {{ asset('images/users/avatar-1.jpg') }}"

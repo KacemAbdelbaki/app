@@ -32,22 +32,24 @@ class OLTController
     }
 
 
-    public function getOLTs()
+    public function getOLTs(Request $request)
     {
+        $searchInput = $request->searchInput;
         $olts = OLT::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
+        ->where('nom', 'like', '%'.$searchInput.'%')
         ->with('cartes')
         ->with('hub')
         ->get();
-        return view('Admin/OLT/olt', ['data' => $olts]);
+        return view('Admin/OLT/olt', ['data' => $olts, 'page' => 'olts', 'searchInput' => $searchInput]);
     }
     
     public function addOLT()
     {
         $cartes = Carte::all();
         $hubs = Hub::all();
-        return view('Admin/OLT/ajouterOLT', ['cartes' => $cartes, 'hubs' => $hubs]);
+        return view('Admin/OLT/ajouterOLT', ['cartes' => $cartes, 'hubs' => $hubs, 'page' => 'olts']);
     }
 
     public function getOLTId($id)
@@ -60,7 +62,7 @@ class OLTController
         $olt->date_mise_service = $olt->date_mise_service ? Carbon::parse($olt->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
         $cartes = Carte::all();
         $hubs = Hub::all();
-        return view('Admin/OLT/modifierOLT', ['data' => $olt, 'cartes' => $cartes, 'hubs' => $hubs]);
+        return view('Admin/OLT/modifierOLT', ['data' => $olt, 'cartes' => $cartes, 'hubs' => $hubs, 'page' => 'olts']);
     }
 
     public function deleteOLT($id)

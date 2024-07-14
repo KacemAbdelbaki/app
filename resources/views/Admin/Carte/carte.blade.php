@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
     <title>Espace Administrateur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +16,6 @@
     <!-- App Css-->
     <link href=" {{ asset('css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 
 <body data-sidebar="dark">
@@ -30,16 +28,10 @@
 
         <!-- ========== Navbar Start ========== -->
         @include('Admin/layout/navbar')
-        <!-- Navbar End -->
-
-        <!-- ========== Left Sidebar Start ========== -->
         @include('Admin/layout/sidebar')
         <!-- Left Sidebar End -->
 
-
-        <!-- ============================================================== -->
         <!-- Start right Content here -->
-        <!-- ============================================================== -->
         <div class="main-content">
 
             <div class="page-content">

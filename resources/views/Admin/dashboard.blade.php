@@ -56,7 +56,6 @@
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
-                    <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -64,7 +63,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- end page title -->
 
                     <div class="row">
                         <div class="col-12">
@@ -91,13 +89,13 @@
                                                     <div class="equipment-chain">
                                                         <i class="fas fa-server equipment-icon" data-toggle="popover" data-trigger="hover" title="<b>OLT</b>" data-content="<strong>Nom:</strong> {{ $chaine['olt']->nom }}<br><strong>Type:</strong> {{ $chaine['olt']->type }}<br><strong>Modèle:</strong> {{ $chaine['olt']->modele }}<br><strong>Adresse:</strong> {{ $chaine['olt']->adresse }}<br><strong>Centrale Optique:</strong> {{ $chaine['olt']->centrale_optique }}<br><strong>Numéro Slot Board:</strong> {{ $chaine['olt']->numero_slot_board }}<br><strong>Date Mise en Service:</strong> {{ $chaine['olt']->date_mise_service }}<br><strong>Hub ID:</strong> {{ $chaine['olt']->hub_id }}<br><strong>Coordonnées:</strong> ({{ $chaine['olt']->longitude }}, {{ $chaine['olt']->latitude }})<br><strong>Capacité en Port:</strong> {{ $chaine['olt']->capacite_en_port }}"></i>
                                                         <i class="fas fa-arrow-right arrow-icon"></i>
-                                                        <i data-toggle="popover" title="<strong>Hub</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $chaine['hub']->nom }}" class="fab fa-hubspot equipment-icon"></i>
+                                                        <i data-toggle="popover" title="<strong>Hub</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $chaine['hub']->nom }}<br><strong>Modèle:</strong> {{ $chaine['hub']->modele }}<br><strong>Adresse:</strong> {{ $chaine['hub']->adresse }}<br>" class="fab fa-hubspot equipment-icon"></i>
                                                         <i class="fas fa-arrow-right arrow-icon"></i>
                                                         @foreach ($chaine['subBoxs'] as $subBox)
-                                                            <i data-toggle="popover" title="<strong>SubBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $subBox->nom }}" class="fas fa-boxes equipment-icon"></i>
+                                                            <i data-toggle="popover" title="<strong>SubBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $subBox->nom }}<br><strong>Modèle:</strong> {{ $subBox->modele }}<br><strong>Adresse:</strong> {{ $subBox->adresse }}<br>" class="fas fa-boxes equipment-icon"></i>
                                                             <i class="fas fa-arrow-right arrow-icon"></i>
                                                         @endforeach
-                                                        <i data-toggle="popover" title="<strong>EndBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $chaine['endBox']->nom }}" class="fas fa-box equipment-icon"></i>
+                                                        <i data-toggle="popover" title="<strong>EndBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $chaine['endBox']->nom }}<br><strong>Modèle:</strong> {{ $chaine['endBox']->modele }}<br><strong>Adresse:</strong> {{ $chaine['endBox']->adresse }}<br>" class="fas fa-box equipment-icon"></i>
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -105,10 +103,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> <!-- end col -->
-                    </div> <!-- end row -->
+                        </div>
+                    </div>
 
-                </div> <!-- container-fluid -->
+                </div>
             </div>
             <!-- End Page-content -->
 
@@ -118,7 +116,6 @@
         </div>
     </div>
     
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <script>
@@ -135,7 +132,6 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            // Define custom icon
             var customIcon = L.Icon.extend({
                 options: {
                     iconSize:     [25, 41],
@@ -145,15 +141,12 @@
                 }
             });
 
-            // Create different colored icons
             var redIcon = new customIcon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png'}),
                 blueIcon = new customIcon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png'}),
                 greenIcon = new customIcon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png'});
 
-            // Add markers for each OLT
             @foreach ($chaines as $index => $chaine)
                 var icon;
-                // Assign different colors based on some condition (here, we're using the index for demonstration)
                 if ({{ $index }} % 3 == 0) {
                     icon = redIcon;
                 } else if ({{ $index }} % 3 == 1) {

@@ -32,15 +32,16 @@ class SubBoxController
     }
 
 
-    public function getSubBoxs()
+    public function getSubBoxs(Request $request)
     {
         $subBoxs = SubBox::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
+        ->where('nom', 'like', '%'.$request->searchInput.'%')
         ->with('subBox')
         ->with('endBox')
         ->get();
-        return view('Admin/SubBox/subBox', ['data' => $subBoxs]);
+        return view('Admin/SubBox/subBox', ['data' => $subBoxs, 'page' => 'subBoxs']);
     }
     
     public function addSubBox()
@@ -48,7 +49,7 @@ class SubBoxController
         $cartes = Carte::all();
         $subBoxs = SubBox::all();
         $endBoxs = EndBox::all();
-        return view('Admin/SubBox/ajouterSubBox', ['cartes' => $cartes, 'subBoxs' => $subBoxs, 'endBoxs' => $endBoxs]);
+        return view('Admin/SubBox/ajouterSubBox', ['cartes' => $cartes, 'subBoxs' => $subBoxs, 'endBoxs' => $endBoxs, 'page' => 'subBoxs']);
     }
 
     public function getSubBoxId($id)
@@ -61,7 +62,7 @@ class SubBoxController
         $subBox->date_mise_service = $subBox->date_mise_service ? Carbon::parse($subBox->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
         $endBoxs = EndBox::all();
         $subBoxs = SUbBox::all();
-        return view('Admin/SubBox/modifierSubBox', ['data' => $subBox, 'endBoxs' => $endBoxs, 'subBoxs' => $subBoxs]);
+        return view('Admin/SubBox/modifierSubBox', ['data' => $subBox, 'endBoxs' => $endBoxs, 'subBoxs' => $subBoxs, 'page' => 'subBoxs']);
     }
 
     public function deleteSubBox($id)

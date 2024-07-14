@@ -30,20 +30,21 @@ class HubController
     }
 
 
-    public function getHubs()
+    public function getHubs(Request $request)
     {
         $hubs = Hub::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
+        ->where('nom', 'like', '%'.$request->searchInput.'%')
         ->with('subBox')
         ->get();
-        return view('Admin/Hub/hub', ['data' => $hubs]);
+        return view('Admin/Hub/hub', ['data' => $hubs, 'page' => 'hubs']);
     }
     
     public function addHub()
     {
         $subBoxs = SubBox::all();
-        return view('Admin/Hub/ajouterHub', ['subBoxs' => $subBoxs]);
+        return view('Admin/Hub/ajouterHub', ['subBoxs' => $subBoxs, 'page' => 'hubs']);
     }
 
     public function getHubId($id)
@@ -55,7 +56,7 @@ class HubController
         ->first();
         $hub->date_mise_service = $hub->date_mise_service ? Carbon::parse($hub->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
         $subBoxs = SubBox::all();
-        return view('Admin/Hub/modifierHub', ['data' => $hub, 'subBoxs' => $subBoxs]);
+        return view('Admin/Hub/modifierHub', ['data' => $hub, 'subBoxs' => $subBoxs, 'page' => 'hubs']);
     }
 
     public function deleteHub($id)

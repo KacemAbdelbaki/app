@@ -19,14 +19,16 @@ class CarteController
     }
 
 
-    public function getCartes(){
-        $cartes = Carte::all();
-        return view('Admin/Carte/carte',['data'=>$cartes]);
+    public function getCartes(Request $request){
+        $cartes = Carte::select('*')
+        ->where('modele_carte', 'like', '%'.$request->searchInput.'%')
+        ->get();
+        return view('Admin/Carte/carte',['data'=>$cartes, 'page' => 'cartes', 'searchInput' => $request->searchInput]);
     }
 
     public function getCarteId($id){
         $carte = Carte::find($id);
-        return view('Admin/Carte/modifierCarte',['data'=>$carte]);
+        return view('Admin/Carte/modifierCarte',['data'=>$carte, 'page' => 'cartes']);
     }
 
     public function deleteCarte($id){

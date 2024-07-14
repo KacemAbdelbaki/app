@@ -31,20 +31,21 @@ class EndBoxController
     }
 
 
-    public function getEndBoxs()
+    public function getEndBoxs(Request $request)
     {
         $endBoxs = EndBox::select('*', 
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
+        ->where('nom', 'like', '%'.$request->searchInput.'%')
         ->with('subBox')
         ->get();
-        return view('Admin/EndBox/endBox', ['data' => $endBoxs]);
+        return view('Admin/EndBox/endBox', ['data' => $endBoxs, 'page' => 'endBoxs']);
     }
     
     public function addEndBox()
     {
         $subBoxs = SubBox::all();
-        return view('Admin/EndBox/ajouterEndBox', ['subBoxs' => $subBoxs]);
+        return view('Admin/EndBox/ajouterEndBox', ['subBoxs' => $subBoxs, 'page' => 'endBoxs']);
     }
 
     public function getEndBoxId($id)
@@ -56,7 +57,7 @@ class EndBoxController
         ->first();
         $endBox->date_mise_service = $endBox->date_mise_service ? Carbon::parse($endBox->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
         $subBoxs = SubBox::all();
-        return view('Admin/EndBox/modifierEndBox', ['data' => $endBox, 'subBoxs' => $subBoxs]);
+        return view('Admin/EndBox/modifierEndBox', ['data' => $endBox, 'subBoxs' => $subBoxs, 'page' => 'endBoxs']);
     }
 
     public function deleteEndBox($id)

@@ -40,7 +40,7 @@ class DashboardController
         $chaines[] = $chaine; 
     }
 
-    return view('Admin/dashboard', ['chaines' => $chaines]);
+    return view('Admin/dashboard', ['chaines' => $chaines, 'page' => 'adminHome']);
 }
 
 }
