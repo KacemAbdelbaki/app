@@ -28,18 +28,12 @@
     <div id="layout-wrapper">
 
 
-        <!-- ========== Navbar Start ========== -->
+        <!-- Navbar Start -->
         @include('Admin/layout/navbar')
-        <!-- Navbar End -->
-
-        <!-- ========== Left Sidebar Start ========== -->
         @include('Admin/layout/sidebar')
         <!-- Left Sidebar End -->
 
-
-        <!-- ============================================================== -->
         <!-- Start right Content here -->
-        <!-- ============================================================== -->
         <div class="main-content">
 
             <div class="page-content">
@@ -65,6 +59,7 @@
                                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                                         <thead>
                                             <tr>
+                                                <th>Type</th>
                                                 <th>Nom</th>
                                                 <th>Numero Serie</th>
                                                 <th>Modele</th>
@@ -82,6 +77,7 @@
                                         <tbody>
                                             @foreach ($data as $item)
                                                 <tr>
+                                                    <td style="vertical-align: middle;">{{ $item->type }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->nom }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->num_serie }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->modele }}</td>
@@ -114,8 +110,7 @@
             </div>
             <!-- End Page-content -->
 
-
-            <!-- ========== Footer Start ========== -->
+            <!-- Footer Start -->
             @include('Admin/layout/footer')
             <!-- Footer End -->
 </body>

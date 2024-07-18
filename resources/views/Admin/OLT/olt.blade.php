@@ -25,7 +25,7 @@
     <!-- Begin page -->
     <div id="layout-wrapper">
 
-        <!-- ========== Navbar Start ========== -->
+        <!-- Navbar Start -->
         @include('Admin/layout/navbar')
         @include('Admin/layout/sidebar')
         <!-- Left Sidebar End -->

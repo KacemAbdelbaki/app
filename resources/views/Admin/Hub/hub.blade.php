@@ -68,9 +68,11 @@
                                                 <th>Nom</th>
                                                 <th>Modèle</th>
                                                 <th>Numero Serie</th>
+                                                <th>Installation</th>
                                                 <th>Ports Affectés</th>
                                                 <th>Adresse</th>
                                                 <th>Nombre Des Chaine Actif</th>
+                                                <th>OLT</th>
                                                 <th>SubBox</th>
                                                 <th>Date Mise En Service</th>
                                                 <th>Coordonne</th>
@@ -84,10 +86,12 @@
                                                     <td style="vertical-align: middle;">{{ $item->nom }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->modele }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->num_serie }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->installation }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->ports_affecte }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->adresse }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->nbr_chaine_actif }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->subBox->nom }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->olt->nom }}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->subBox->nom ?? "---"}}</td>
                                                     <td style="vertical-align: middle;">{{ $item->date_mise_service }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->latitude }} {{ $item->longitude }}</td>
                                                     <td>

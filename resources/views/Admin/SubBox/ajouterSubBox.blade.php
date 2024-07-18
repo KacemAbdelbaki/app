@@ -49,6 +49,16 @@
                                     <form action="{{ route('subBox.store') }}" method="POST">
                                         @csrf
                                         <div class="row mb-4">
+                                            <label for="type" class="col-form-label col-lg-2">Type</label>
+                                            <div class="col-lg-10">
+                                                <select name="type" id="type" class="form-control">
+                                                    <option value="">-- Selectionner Type --</option>
+                                                    <option value="SubBox">SubBox</option>
+                                                    <option value="EndBox">EndBox</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
                                             <label for="nom" class="col-form-label col-lg-2">Nom</label>
                                             <div class="col-lg-10">
                                                 <input id="nom" name="nom" type="text" class="form-control" placeholder="Entrer le nom">
@@ -66,30 +76,30 @@
                                                 <input id="modele" name="modele" type="text" class="form-control" placeholder="Entrer le modele">
                                             </div>
                                         </div>
-                                        <div class="row mb-4">
+                                        {{-- <div class="row mb-4">
                                             <label for="num_dans_chaine" class="col-form-label col-lg-2">Numero Dans La Chaine</label>
                                             <div class="col-lg-10">
                                                 <input id="num_dans_chaine" name="num_dans_chaine" type="text" class="form-control" placeholder="Entrer le numero dans la chaine">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="row mb-4">
-                                            <label for="sub_box_suivant_id" class="col-form-label col-lg-2">SubBox</label>
+                                            <label for="hub_id" class="col-form-label col-lg-2">Hub</label>
                                             <div class="col-lg-10">
-                                                <select id="sub_box_suivant_id" name="sub_box_suivant_id" class="form-control">
-                                                    <option value="">-- Selectionner SubBox --</option>
-                                                    @foreach ($subBoxs as $subBox)
-                                                    <option value={{$subBox->id}}>{{$subBox->nom}}</option>
+                                                <select id="hub_id" name="hub_id" class="form-control">
+                                                    <option value="">-- Selectionner Hub --</option>
+                                                    @foreach ($hubs as $hub)
+                                                    <option value={{$hub->id}}>{{$hub->nom}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="end_box_id" class="col-form-label col-lg-2">EndBox</label>
+                                            <label for="sub_box_precedent_id" class="col-form-label col-lg-2">SubBox Precedent</label>
                                             <div class="col-lg-10">
-                                                <select id="end_box_id" name="end_box_id" class="form-control">
-                                                    <option value="">-- Selectionner EndBox --</option>
-                                                    @foreach ($endBoxs as $endBox)
-                                                    <option value={{$endBox->id}}>{{$endBox->nom}}</option>
+                                                <select id="sub_box_precedent_id" name="sub_box_precedent_id" class="form-control">
+                                                    <option value="">-- Selectionner SubBox --</option>
+                                                    @foreach ($subBoxs as $subBox)
+                                                    <option value={{$subBox->id}}>{{$subBox->nom}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -130,7 +140,7 @@
                                         </div>
                                         <div class="row justify-content-end">
                                             <div class="col-lg-10">
-                                                <button type="submit" class="btn btn-primary">Ajouter Hub</button>
+                                                <button type="submit" class="btn btn-primary">Ajouter SubBox</button>
                                             </div>
                                         </div>
                                     </form>

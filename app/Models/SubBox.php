@@ -10,13 +10,13 @@ class SubBox extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = 'sub_box';
-    protected $fillable = ['id', 'nom', 'num_serie', 'modele', 'installation', 'coordonne', 'adresse', 'num_dans_chaine', 'sub_box_suivant_id', 'end_box_id', 'date_mise_service'];
+    protected $fillable = ['id', 'type', 'nom', 'num_serie', 'modele', 'installation', 'coordonne', 'adresse', 'num_dans_chaine', 'sub_box_precedent_id', 'hub_id', 'date_mise_service'];
 
     public function subBox(){
-        return $this->belongsTo(SubBox::class, 'sub_box_suivant_id');
+        return $this->belongsTo(SubBox::class, 'sub_box_precedent_id');
     }
 
-    public function endBox(){
-        return $this->belongsTo(EndBox::class, 'end_box_id');
+    public function Hub(){
+        return $this->belongsTo(Hub::class, 'hub_id');
     }
 }

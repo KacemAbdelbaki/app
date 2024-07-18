@@ -94,7 +94,7 @@
                                         <div class="row mb-4">
                                             <label for="num_slot_board" class="col-form-label col-lg-2">Numéro de Slot Board</label>
                                             <div class="col-lg-10">
-                                                <input id="num_slot_board" name="num_slot_board" type="text" class="form-control" placeholder="Entrer le numéro de slot board">
+                                                <input id="num_slot_board" name="num_slot_board" type="number" class="form-control" placeholder="Entrer le numéro de slot board">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -110,28 +110,29 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="carte_id" class="col-form-label col-lg-2">Carte</label>
+                                            <label for="carte_id" class="col-form-label col-lg-2 d-flex align-items-center">
+                                                Carte 
+                                                <button type="button" class="btn btn-primary btn-sm ms-2" onclick="modifyOLT()">+</button>
+                                            </label>
                                             <div class="col-lg-10">
-                                                <select id="carte_id" name="carte_id" class="form-control">
-                                                    @foreach ($cartes as $carte)
-                                                        <option value={{$carte->id}}>{{$carte->modele_carte}}</option>
-                                                    @endforeach
-                                                </select>
+                                                <div id="carte_div" class="row">
+                                                    <div class="col-lg-4 col-md-6 mb-2 mb-lg-0">
+                                                        <select id="carte_id" name="carte_id[]" class="form-control" onchange="checkAndDeleteEmptyOptions(this)">
+                                                            <option value="">-- Sélectionner carte --</option>
+                                                            @foreach ($cartes as $newCarte)
+                                                                <option value="{{ $newCarte->id }}">
+                                                                    {{ $newCarte->modele_carte }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row mb-4">
-                                            <label for="hub_id" class="col-form-label col-lg-2">Hub</label>
-                                            <div class="col-lg-10">
-                                                <select id="hub_id" name="hub_id" class="form-control">
-                                                    @foreach ($hubs as $hub)
-                                                        <option value={{$hub->id}}>{{$hub->nom}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>                                        
+                                        <input type="text" id="concatenated_values" name="concatenated_values" value="" class="d-none">                                     
                                         <div class="row justify-content-end">
                                             <div class="col-lg-10">
-                                                <button type="submit" class="btn btn-primary">Ajouter Carte</button>
+                                                <button type="submit" class="btn btn-primary">Ajouter OLT</button>
                                             </div>
                                         </div>
                                     </form>
@@ -144,4 +145,51 @@
 
             @include('Admin/layout/footer')
 </body>
+
+<script>
+    function modifyOLT() {
+        const newSelectHtml = `
+            <div class="col-lg-4 col-md-6 mb-2 mb-lg-0">
+                <select id="carte_id" name="carte_id[]" class="form-control" onchange="checkAndDeleteEmptyOptions(this)">
+                    <option value="">-- Sélectionner carte --</option>
+                    @foreach ($cartes as $newCarte)
+                        <option value="{{ $newCarte->id }}">
+                            {{ $newCarte->modele_carte }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        `;
+        document.getElementById('carte_div').insertAdjacentHTML('beforeend', newSelectHtml);
+        updateConcatenatedValues();
+    }
+
+    function checkAndDeleteEmptyOptions(selectElement) {
+        if (selectElement.value === "") {
+            selectElement.closest('.col-lg-4').remove();
+        }
+        updateConcatenatedValues();
+    }
+
+    function updateConcatenatedValues() {
+        const selectElements = document.querySelectorAll('select[name="carte_id[]"]');
+        let values = [];
+        selectElements.forEach(select => {
+            if (select.value !== "") {
+                values.push(select.value);
+            }
+        });
+        const concatenatedValues = values.join(',');
+        document.getElementById('concatenated_values').value = concatenatedValues;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        updateConcatenatedValues();
+    });
+
+    document.querySelectorAll('select[name="carte_id[]"]').forEach(select => {
+        select.addEventListener('change', checkAndDeleteEmptyOptions);
+    });
+</script>
+
 </html>

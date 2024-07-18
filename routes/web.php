@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OLTController;
 use App\Http\Controllers\Admin\HubController;
 use App\Http\Controllers\Admin\SubBoxController;
-use App\Http\Controllers\Admin\EndBoxController;
 
 Route::get('/', [DashboardController::class, 'getAll'])->name('adminHome');
 // OLT
@@ -42,11 +41,3 @@ Route::post('/subBoxS', [SubBoxController::class, 'storeSubBox'])->name('subBox.
 Route::post('/subBoxU', [SubBoxController::class, 'updateSubBox'])->name('subBox.update');
 Route::get('/modifierSubBox/{id}', [SubBoxController::class, 'getSubBoxId'])->name('modifierSubBox');
 Route::get('/supprimerSubBox/{id}', [SubBoxController::class, 'deleteSubBox'])->name('supprimerSubBox');
-
-// EndBox
-Route::get('/endBoxs', [EndBoxController::class, 'getEndBoxs'])->name('endBoxs');
-Route::get('/ajouterEndBox', [EndBoxController::class, 'addEndBox'])->name('ajouterEndBox');
-Route::post('/endBoxS', [EndBoxController::class, 'storeEndBox'])->name('endBox.store');
-Route::post('/endBoxU', [EndBoxController::class, 'updateEndBox'])->name('endBox.update');
-Route::get('/modifierEndBox/{id}', [EndBoxController::class, 'getEndBoxId'])->name('modifierEndBox');
-Route::get('/supprimerEndBox/{id}', [EndBoxController::class, 'deleteEndBox'])->name('supprimerEndBox');

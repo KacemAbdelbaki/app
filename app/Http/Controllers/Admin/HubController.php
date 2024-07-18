@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Hub;
 use App\Models\SubBox;
+use App\Models\OLT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -22,7 +23,7 @@ class HubController
         $hub->coordonne = DB::raw("POINT($longitude, $latitude)");
         $hub->adresse = $request->adresse;
         $hub->nbr_chaine_actif = $request->nbr_chaine_actif;
-        $hub->sub_box_id = $request->sub_box_id;   
+        $hub->olt_id = $request->olt_id;
         $hub->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
         $hub->installation = $request->installation; 
         $hub->save();
@@ -36,15 +37,15 @@ class HubController
         DB::raw('ST_X(coordonne) as longitude'), 
         DB::raw('ST_Y(coordonne) as latitude'))
         ->where('nom', 'like', '%'.$request->searchInput.'%')
-        ->with('subBox')
+        ->with('olt')
         ->get();
         return view('Admin/Hub/hub', ['data' => $hubs, 'page' => 'hubs']);
     }
     
     public function addHub()
     {
-        $subBoxs = SubBox::all();
-        return view('Admin/Hub/ajouterHub', ['subBoxs' => $subBoxs, 'page' => 'hubs']);
+        $OLTs = OLT::all();
+        return view('Admin/Hub/ajouterHub', ['OLTs' => $OLTs, 'page' => 'hubs']);
     }
 
     public function getHubId($id)
@@ -55,8 +56,8 @@ class HubController
         ->where('id', $id)
         ->first();
         $hub->date_mise_service = $hub->date_mise_service ? Carbon::parse($hub->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
-        $subBoxs = SubBox::all();
-        return view('Admin/Hub/modifierHub', ['data' => $hub, 'subBoxs' => $subBoxs, 'page' => 'hubs']);
+        $OLTs = OLT::all();
+        return view('Admin/Hub/modifierHub', ['data' => $hub, 'OLTs' => $OLTs, 'page' => 'hubs']);
     }
 
     public function deleteHub($id)
@@ -78,7 +79,7 @@ class HubController
         $hub->coordonne = DB::raw("POINT($longitude, $latitude)");
         $hub->adresse = $request->adresse;
         $hub->nbr_chaine_actif = $request->nbr_chaine_actif;
-        $hub->sub_box_id = $request->sub_box_id;   
+        $hub->olt_id = $request->olt_id;  
         $hub->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
         $hub->installation = $request->installation;
         $hub->update();

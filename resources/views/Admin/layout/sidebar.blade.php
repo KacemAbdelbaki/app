@@ -51,18 +51,6 @@
                     </ul>
                 </li>
                 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fa fa-users" style='font-size:14px'></i>
-                        <span key="t-ui-elements">EndBox</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('endBoxs')}}" key="t-alerts">Liste des EndBox</a></li>
-                        <li><a href="{{route('ajouterEndBox')}}" key="t-buttons">Ajouter un EndBoxs</a></li>
-                    </ul>
-                </li>
-
-                
                 </li>
             </ul>
         </div>

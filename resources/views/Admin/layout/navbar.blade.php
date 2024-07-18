@@ -27,13 +27,28 @@
             </button>
 
             <!-- App Search-->
-            <form class="app-search d-none d-lg-block" action="{{ route($page) }}">
+            <form id="searchForm" name="searchForm" class="app-search d-none d-lg-block" action="{{ route($page) }}">
                 <div class="position-relative">
-                    <input name="searchInput" type="text" class="form-control" placeholder="Search...">
+                    <input name="searchInput" id="searchInput" type="text" class="form-control" placeholder="Search..." value="{{$searchInput ?? ""}}">
                     <span class="bx bx-search-alt"></span> {{ $searchInput ?? '--' }}
                 </div>
             </form>
-
+            <script>
+                // Get the search input element
+                var searchInput = document.getElementById('searchInput');
+                // Add event listener for input change
+                searchInput.addEventListener('input', function() {
+                    document.getElementById('searchForm').submit();
+                });
+                // Set focus on the search input after the page loads
+                 window.addEventListener('load', function() {
+                    searchInput.focus();
+                });
+                // Restore cursor position after form submission
+                window.addEventListener('DOMContentLoaded', function() {
+                    searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
+                });
+            </script>
 
             <div class="dropdown dropdown-mega d-none d-lg-block ms-2">
                 <div class="dropdown-menu dropdown-megamenu">

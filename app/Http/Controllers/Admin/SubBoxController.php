@@ -22,10 +22,10 @@ class SubBoxController
         $latitude = $request->latitude;  
         $subBox->coordonne = DB::raw("POINT($longitude, $latitude)");
         $subBox->adresse = $request->adresse;
-        $subBox->num_dans_chaine = $request->num_dans_chaine;
-        $subBox->sub_box_suivant_id = $request->sub_box_suivant_id;    
-        $subBox->end_box_id = $request->end_box_id;    
+        $subBox->num_dans_chaine = $request->num_dans_chaine; // to automate
+        $subBox->sub_box_precedent_id = $request->sub_box_precedent_id;
         $subBox->installation = $request->installation;
+        $subBox->hub_id = $request->hub_id;
         $subBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
         $subBox->save();
         return redirect()->route('subBoxs')->with('success', 'Formulaire soumis avec succès!');
@@ -39,17 +39,15 @@ class SubBoxController
         DB::raw('ST_Y(coordonne) as latitude'))
         ->where('nom', 'like', '%'.$request->searchInput.'%')
         ->with('subBox')
-        ->with('endBox')
         ->get();
         return view('Admin/SubBox/subBox', ['data' => $subBoxs, 'page' => 'subBoxs']);
     }
     
     public function addSubBox()
     {
-        $cartes = Carte::all();
         $subBoxs = SubBox::all();
-        $endBoxs = EndBox::all();
-        return view('Admin/SubBox/ajouterSubBox', ['cartes' => $cartes, 'subBoxs' => $subBoxs, 'endBoxs' => $endBoxs, 'page' => 'subBoxs']);
+        $hubs = Hub::all();
+        return view('Admin/SubBox/ajouterSubBox', ['subBoxs' => $subBoxs, 'hubs' => $hubs, 'page' => 'subBoxs']);
     }
 
     public function getSubBoxId($id)
@@ -60,7 +58,9 @@ class SubBoxController
         ->where('id', $id)
         ->first();
         $subBox->date_mise_service = $subBox->date_mise_service ? Carbon::parse($subBox->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
-        $endBoxs = EndBox::all();
+        $endBoxs = SubBox::select('*')
+        ->where('type', 'like', 'EndBox')
+        ->get();
         $subBoxs = SUbBox::all();
         return view('Admin/SubBox/modifierSubBox', ['data' => $subBox, 'endBoxs' => $endBoxs, 'subBoxs' => $subBoxs, 'page' => 'subBoxs']);
     }
@@ -82,9 +82,8 @@ class SubBoxController
         $latitude = $request->latitude;  
         $subBox->coordonne = DB::raw("POINT($longitude, $latitude)");
         $subBox->adresse = $request->adresse;
-        $subBox->num_dans_chaine = $request->num_dans_chaine;
-        $subBox->sub_box_suivant_id = $request->sub_box_suivant_id;    
-        $subBox->end_box_id = $request->end_box_id;    
+        $subBox->num_dans_chaine = $request->num_dans_chaine; // to automate
+        $subBox->sub_box_precedent_id = $request->sub_box_precedent_id; 
         $subBox->installation = $request->installation;
         $subBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');
         $subBox->update();

@@ -16,7 +16,7 @@
     <link href=" {{ asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href=" {{ asset('css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
@@ -70,7 +70,24 @@
                                         <div class="row mb-4">
                                             <label for="ports_affecte" class="col-form-label col-lg-2">Ports Affectes</label>
                                             <div class="col-lg-10">
-                                                <input id="ports_affecte" name="ports_affecte" value="{{ $data->ports_affecte }}" type="text" class="form-control" placeholder="Entrer les ports affectes">
+                                                <input id="ports_affecte" name="ports_affecte" value="{{ $data->ports_affecte }}" type="text" class="form-control d-none" placeholder="Entrer les ports affectes">
+                                                <div class="row justify-content-around">
+                                                    @php
+                                                        $ports = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+                                                    @endphp
+                                                    <div class="row justify-content-around">
+                                                        @foreach ($ports as $port)
+                                                            <label id="btn_{{ $port }}" class="btn btn-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                                                <input onclick="add({{ $port }})" type="checkbox" class="d-none">
+                                                                @if ($port < 10)
+                                                                    <i class="fa-solid fa-{{ $port }}"></i>
+                                                                @else
+                                                                    <i class="fa-solid fa-{{ floor($port / 10) }}"></i><i class="fa-solid fa-{{ $port % 10 }}"></i>
+                                                                @endif
+                                                            </label>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -105,11 +122,12 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="sub_box_id" class="col-form-label col-lg-2">SubBox</label>
+                                            <label for="olt_id" class="col-form-label col-lg-2">OLT</label>
                                             <div class="col-lg-10">
-                                                <select id="sub_box_id" name="sub_box_id" value="{{ $data->sub_box_id }}" class="form-control">
-                                                    @foreach ($subBoxs as $subBox)
-                                                        <option value={{$subBox->id}}>{{$subBox->nom}}</option>
+                                                <select id="olt_id" name="olt_id" class="form-control">
+                                                    <option value="">-- Selectionner un OLT --</option>
+                                                    @foreach ($OLTs as $OLT)
+                                                        <option value={{$OLT->id}} {{ $OLT->id == $data->olt->id ? 'selected' : '' }}>{{$OLT->nom}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -117,15 +135,15 @@
                                         <div class="row mb-4">
                                             <label for="installation" class="col-form-label col-lg-2">Installation</label>
                                             <div class="col-lg-10">
-                                                <select id="installation" name="installation" value="{{ $data->installation }}" class="form-control">
-                                                        <option value="Aérien">Aérien</option>
-                                                        <option value="Sousterrain">Sousterrain</option>
-                                                </select>
+                                                <select id="installation" name="installation" class="form-control">
+                                                    <option value="Aérien" {{ $data->installation == "Aérien" ? 'selected' : '' }}>Aérien</option>
+                                                    <option value="Souterrain" {{ $data->installation == "Souterrain" ? 'selected' : '' }}>Souterrain</option>
+                                                </select>                                                
                                             </div>
                                         </div>                                 
                                         <div class="row justify-content-end">
                                             <div class="col-lg-10">
-                                                <button type="submit" class="btn btn-primary">Ajouter Hub</button>
+                                                <button type="submit" class="btn btn-primary">Modifier Hub</button>
                                             </div>
                                         </div>
                                     </form>
@@ -138,4 +156,35 @@
 
             @include('Admin/layout/footer')
 </body>
+<script>
+    let ports = [];
+    const ports_input = document.getElementById('ports_affecte');
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let value = ports_input.value;
+        ports = value.split(",");
+        ports.forEach(e => {
+            document.getElementById("btn_"+e).classList.remove('btn-danger');
+            document.getElementById("btn_"+e).classList.add('btn-success');
+        });
+        console.log(value);
+    });
+
+    function add(port) {
+        const index = ports.indexOf(port);
+
+        if (index !== -1) {
+            ports.splice(index, 1);
+            document.getElementById("btn_"+port).classList.remove('btn-success');
+            document.getElementById("btn_"+port).classList.add('btn-danger');
+        } else {
+            ports.push(port);
+            document.getElementById("btn_"+port).classList.remove('btn-danger');
+            document.getElementById("btn_"+port).classList.add('btn-success');
+        }
+        ports.sort((a, b) => a - b);
+        let value = ports.join(',');
+        ports_input.value = value;
+    }
+</script>
 </html>
