@@ -65,8 +65,8 @@
                                                 <th>Modele</th>
                                                 <th>Installation</th>
                                                 <th>Numero Dans La Chaine</th>
-                                                <th>SubBox Swuivant</th>
-                                                <th>EndBox Swuivant</th>
+                                                <th>SubBox Suivant</th>
+                                                <th>EndBox Suivant</th>
                                                 <th>Date Mise En Service</th>
                                                 <th>Adresse</th>
                                                 <th>Coordonne</th>

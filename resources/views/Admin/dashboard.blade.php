@@ -95,7 +95,7 @@
                                                             <i data-toggle="popover" title="<strong>SubBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $subBox->nom }}<br><strong>Modèle:</strong> {{ $subBox->modele }}<br><strong>Adresse:</strong> {{ $subBox->adresse }}<br>" class="fas fa-boxes equipment-icon"></i>
                                                             <i class="fas fa-arrow-right arrow-icon"></i>
                                                         @endforeach
-                                                        <i data-toggle="popover" title="<strong>EndBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $chaine['endBox']->nom }}<br><strong>Modèle:</strong> {{ $chaine['endBox']->modele }}<br><strong>Adresse:</strong> {{ $chaine['endBox']->adresse }}<br>" class="fas fa-box equipment-icon"></i>
+                                                        <i data-toggle="popover" title="<strong>EndBox</strong>" data-container="body" data-html="true" data-content="<strong>Nom:</strong> {{ $chaine['endBox']->nom ?? "---" }}<br><strong>Modèle:</strong> {{ $chaine['endBox']->modele ?? "---" }}<br><strong>Adresse:</strong> {{ $chaine['endBox']->adresse ?? "---" }}<br>" class="fas fa-box equipment-icon"></i>
                                                     </div>
                                                 @endforeach
                                             </div>

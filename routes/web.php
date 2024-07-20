@@ -7,7 +7,8 @@ use App\Http\Controllers\Admin\OLTController;
 use App\Http\Controllers\Admin\HubController;
 use App\Http\Controllers\Admin\SubBoxController;
 
-Route::get('/', [DashboardController::class, 'getAll'])->name('adminHome');
+Route::get('/', [DashboardController::class, 'updateEquipmentOrder'])->name('adminHome');
+// Route::get('/', [DashboardController::class, 'updateEquipmentOrder'])->name('adminHome');
 // OLT
 Route::get('/olts', [OLTController::class, 'getOLTs'])->name('olts');
 Route::get('/ajouterOLT', [OLTController::class, 'addOLT'])->name('ajouterOLT');

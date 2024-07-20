@@ -22,6 +22,6 @@ class Hub extends Model
     }
     public function subBox()
     {
-        return $this->hasOne(SubBox::class, 'hub_id');
+        return $this->hasMany(SubBox::class, 'hub_id');
     }
 }

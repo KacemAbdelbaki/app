@@ -15,6 +15,7 @@ class SubBoxController
     public function storeSubBox(Request $request)
     {
         $subBox = new SubBox();
+        $subBox->type = $request->type;
         $subBox->nom = $request->nom;
         $subBox->num_serie = $request->num_serie;
         $subBox->modele = $request->modele;

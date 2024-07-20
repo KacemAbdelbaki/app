@@ -12,35 +12,70 @@ use Carbon\Carbon;
 
 class DashboardController
 {
-    public function getAll()
-{
-    $olts = OLT::select('*', 
-        DB::raw('ST_X(coordonne) as longitude'), 
-        DB::raw('ST_Y(coordonne) as latitude'))
+    // public function getAll()
+    // {
+    //     $olts = OLT::select(
+    //         '*',
+    //         DB::raw('ST_X(coordonne) as longitude'),
+    //         DB::raw('ST_Y(coordonne) as latitude')
+    //     )
+    //         ->get();
+
+    //     $chaines = array();
+    //     foreach ($olts as $olt) {
+    //         $hub = Hub::find($olt->hub_id);
+    //         $subBoxs = array();
+
+    //         if ($hub) {
+    //             $subBox = SubBox::find($hub->sub_box_id);
+
+    //             while ($subBox->sub_box_suivant_id != null) {
+    //                 $subBoxs[] = $subBox;
+    //                 $subBox = SubBox::find($subBox->sub_box_suivant_id);
+    //             }
+    //             $subBoxs[] = $subBox;
+
+    //             $endbox = EndBox::find($subBox->end_box_id);
+    //         }
+
+    //         $chaine = array('olt' => $olt, 'hub' => $hub, 'subBoxs' => $subBoxs, 'endBox' => $endbox);
+    //         $chaines[] = $chaine;
+    //     }
+
+    //     return view('Admin/dashboard', ['chaines' => $chaines, 'page' => 'adminHome']);
+    // }
+
+    public function updateEquipmentOrder()
+    {
+        $olts = OLT::select('*',
+                DB::raw('ST_X(coordonne) as longitude'),
+                DB::raw('ST_Y(coordonne) as latitude'))
+        ->with(['hub.subBox' => function($query){
+            $query->with('subBox');
+        }])
         ->get();
-
-    $chaines = array();
-    foreach ($olts as $olt) {
-        $hub = Hub::find($olt->hub_id);
-        $subBoxs = array();
-
-        if ($hub) {
-            $subBox = SubBox::find($hub->sub_box_id);
-
-            while ($subBox->sub_box_suivant_id != null) {
-                $subBoxs[] = $subBox;
-                $subBox = SubBox::find($subBox->sub_box_suivant_id);
+        $chaines = [];
+        foreach($olts as $olt){
+            $subBoxs = [];
+            $endBox = null;
+            foreach ($olt->hub->subBox as $subBox) {
+                if($subBox != null){
+                    
+                    $currentSubBox = $subBox;
+                    while ($currentSubBox) {
+                        if($currentSubBox->type == "SubBox"){
+                            $subBoxs[] = $currentSubBox;
+                        }
+                        else{
+                            $endBox = $currentSubBox;
+                        };
+                        $currentSubBox = $currentSubBox->subBox;
+                    }
+                }
             }
-            $subBoxs[] = $subBox;
-
-            $endbox = EndBox::find($subBox->end_box_id);
+            $chaine = array('olt' => $olt, 'hub' => $olt->hub, 'subBoxs' => $subBoxs, 'endBox' => $endBox);
+            $chaines[] = $chaine;
         }
-
-        $chaine = array('olt' => $olt, 'hub' => $hub, 'subBoxs' => $subBoxs, 'endBox' => $endbox);
-        $chaines[] = $chaine; 
+        return view('Admin/dashboard', ['chaines' => $chaines, 'page' => 'adminHome']);
     }
-
-    return view('Admin/dashboard', ['chaines' => $chaines, 'page' => 'adminHome']);
-}
-
 }
