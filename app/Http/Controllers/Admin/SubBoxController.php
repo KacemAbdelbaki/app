@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Carte;
-use App\Models\EndBox;
 use App\Models\Hub;
 use App\Models\SubBox;
 use Illuminate\Http\Request;
@@ -23,7 +21,7 @@ class SubBoxController
         $latitude = $request->latitude;  
         $subBox->coordonne = DB::raw("POINT($longitude, $latitude)");
         $subBox->adresse = $request->adresse;
-        $subBox->num_dans_chaine = $request->num_dans_chaine; // to automate
+        // $subBox->num_dans_chaine = $request->num_dans_chaine; // automated
         $subBox->sub_box_precedent_id = $request->sub_box_precedent_id;
         $subBox->installation = $request->installation;
         $subBox->hub_id = $request->hub_id;
@@ -41,6 +39,7 @@ class SubBoxController
         ->where('nom', 'like', '%'.$request->searchInput.'%')
         ->with('subBox')
         ->get();
+        (new DashboardController)->updateEquipmentOrder();
         return view('Admin/SubBox/subBox', ['data' => $subBoxs, 'page' => 'subBoxs']);
     }
     
@@ -83,7 +82,7 @@ class SubBoxController
         $latitude = $request->latitude;  
         $subBox->coordonne = DB::raw("POINT($longitude, $latitude)");
         $subBox->adresse = $request->adresse;
-        $subBox->num_dans_chaine = $request->num_dans_chaine; // to automate
+        // $subBox->num_dans_chaine = $request->num_dans_chaine; // automated
         $subBox->sub_box_precedent_id = $request->sub_box_precedent_id; 
         $subBox->installation = $request->installation;
         $subBox->date_mise_service = Carbon::parse($request->date_mise_service)->format('Y-m-d H:i:s');

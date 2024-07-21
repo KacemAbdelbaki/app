@@ -213,7 +213,6 @@
             EndBox.classList.remove('active');
             type.value = 'SubBox';
             hub.disabled = false;
-            subBoxPrecedent.disabled = false;
             Box.textContent = 'Ajouter Nouveau SubBox';
         });
 
@@ -222,7 +221,6 @@
             SubBox.classList.remove('active');
             type.value = 'EndBox';
             hub.disabled = true;
-            subBoxPrecedent.disabled = true;
             Box.textContent = 'Ajouter Nouveau EndBox';
         });
 
@@ -238,7 +236,9 @@
             if (subBoxPrecedent.value !== "") {
                 hub.disabled = true;
             } else {
-                hub.disabled = false;
+                if(!(EndBox.classList.contains('active'))){
+                    hub.disabled = false;
+                }
             }
         });
     });

@@ -59,18 +59,18 @@ class DashboardController
             $subBoxs = [];
             $endBox = null;
             foreach ($olt->hub->subBox as $subBox) {
-                if($subBox != null){
-                    
-                    $currentSubBox = $subBox;
-                    while ($currentSubBox) {
-                        if($currentSubBox->type == "SubBox"){
-                            $subBoxs[] = $currentSubBox;
-                        }
-                        else{
-                            $endBox = $currentSubBox;
-                        };
-                        $currentSubBox = $currentSubBox->subBox;
+                $i = 3;
+                while ($subBox) {
+                    $subBox->num_dans_chaine = $i;
+                    $subBox->update();
+                    $i++;
+                    if($subBox->type == "SubBox"){
+                        $subBoxs[] = $subBox;
                     }
+                    else{
+                        $endBox = $subBox;
+                    };
+                    $subBox = $subBox->subBox;
                 }
             }
             $chaine = array('olt' => $olt, 'hub' => $olt->hub, 'subBoxs' => $subBoxs, 'endBox' => $endBox);

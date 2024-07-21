@@ -40,6 +40,56 @@
             width: 100%;
             margin-bottom: 20px;
         }
+        .leaflet-control-radius {
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        .leaflet-control-radius .radius-slider-container {
+            display: flex;
+            align-items: center;
+            width: 200px;
+        }
+
+        .leaflet-control-radius-slider-label {
+            margin-right: 5px;
+            white-space: nowrap;
+        }
+
+        .leaflet-control-radius-slider {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            height: 5px;
+            background: #ddd;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .leaflet-control-radius-slider:hover {
+            opacity: 1;
+        }
+
+        .leaflet-control-radius-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #888;
+            cursor: pointer;
+        }
+
+        .leaflet-control-radius-slider::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #888;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -79,7 +129,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Vous pouvez visualiser ou modifier des informations concernant le materiel AirPon</h4>
+                                    <h4 class="card-title">Visualiser des informations concernant le materiel AirPon</h4>
                                     <br />
 
                                     <div class="container">
@@ -125,13 +175,96 @@
                 placement: 'left',
                 trigger: 'hover'
             });
-
+    
             var map = L.map('map').setView([33.9, 10.0], 9); 
+    
+            // Circle test
+            var radius = 200;
+            var circle = L.circle([33.88395, 10.09328], { radius: radius }).addTo(map);
+
+            circle.on('mousedown', function() {
+                map.dragging.disable();
+                map.on('mousemove', function(e) {
+                    circle.setLatLng(e.latlng);
+                    updateMarkerVisibility();
+                });
+            });
+
+            map.on('mouseup', function() {
+                map.dragging.enable();
+                map.off('mousemove');
+            });
+
+            var markers = [];
+
+            function isMarkerInsideCircle(marker, circle) {
+                var circleLatLng = circle.getLatLng();
+                var markerLatLng = marker.getLatLng();
+                return circleLatLng.distanceTo(markerLatLng) <= circle.getRadius();
+            }
+
+            function updateMarkerVisibility() {
+                markers.forEach(function(marker) {
+                    if (isMarkerInsideCircle(marker, circle)) {
+                        marker.addTo(map);
+                    } else {
+                        marker.remove();
+                    }
+                });
+            }
+
+            L.Control.RadiusSlider = L.Control.extend({
+                options: {
+                    position: 'topright'
+                },
+
+                onAdd: function (map) {
+                    var controlName = 'leaflet-control-radius';
+                    var container = L.DomUtil.create('div', controlName + ' leaflet-bar leaflet-control');
+                    var options = this.options;
+
+                    this._container = container;
+
+                    this._sliderContainer = L.DomUtil.create('div', 'radius-slider-container', container);
+                    var slider = this._createSlider(controlName + '-slider', this._sliderContainer, this._updateRadius);
+                    this._slider = slider;
+
+                    L.DomEvent.disableClickPropagation(container);
+
+                    return container;
+                },
+
+                _createSlider: function (className, container, fn) {
+                    var sliderContainer = L.DomUtil.create('div', className + '-container', container);
+                    var label = L.DomUtil.create('span', className + '-label', sliderContainer);
+                    label.innerHTML = 'Radius: ';
+                    var slider = L.DomUtil.create('input', className, sliderContainer);
+                    slider.type = 'range';
+                    slider.min = 100;
+                    slider.max = 100000;
+                    slider.step = 100;
+                    slider.value = radius;
+
+                    L.DomEvent.on(slider, 'input', fn, this);
+
+                    return slider;
+                },
+
+                _updateRadius: function (e) {
+                    radius = parseInt(e.target.value);
+                    circle.setRadius(radius);
+                    updateMarkerVisibility();
+                }
+            });
+
+            var radiusSlider = new L.Control.RadiusSlider();
+            radiusSlider.addTo(map);
+            // circle test end
             
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
-
+    
             var customIcon = L.Icon.extend({
                 options: {
                     iconSize:     [25, 41],
@@ -140,11 +273,11 @@
                     shadowSize:   [41, 41]
                 }
             });
-
+    
             var redIcon = new customIcon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png'}),
                 blueIcon = new customIcon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png'}),
                 greenIcon = new customIcon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png'});
-
+    
             @foreach ($chaines as $index => $chaine)
                 var icon;
                 if ({{ $index }} % 3 == 0) {
@@ -154,11 +287,14 @@
                 } else {
                     icon = greenIcon;
                 }
-                L.marker([{{ $chaine['olt']->longitude }}, {{ $chaine['olt']->latitude }}], {icon: icon})
-                    .addTo(map)
+                var marker = L.marker([{{ $chaine['olt']->longitude }}, {{ $chaine['olt']->latitude }}], {icon: icon})
                     .bindPopup("<b>{{ $chaine['olt']->nom }}</b><br>Type: {{ $chaine['olt']->type }}<br>Modèle: {{ $chaine['olt']->modele }}");
+                markers.push(marker);
             @endforeach
-
+    
+            // Initial update of marker visibility
+            updateMarkerVisibility();
+    
             // var group = new L.featureGroup(map._layers);
             // map.fitBounds(group.getBounds().pad(0.1));
         });
