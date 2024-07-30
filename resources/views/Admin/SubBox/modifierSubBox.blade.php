@@ -36,8 +36,16 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">Modifier</h4>
+                            <div class="page-title-box d-sm-flex align-items-center">
+                                <h4 class="mb-sm-0 font-size-18">Modifier </h4>
+                                <ul class="nav nav-tabs ms-3">
+                                    <li class="nav-item">
+                                        <a id="SubBox" name="SubBox" class="nav-link"aria-current="page">SubBox</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="EndBox" name="EndBox" class="nav-link" aria-current="page">EndBox</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -45,93 +53,102 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title mb-4">Modifier SubBox</h4>
-                                    <form action="{{ route('subBox.update') }}" method="POST">
+                                    <div class="card mb-4">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h4 id="Box" class="card-title mb-0">Modifier </h4>
+                                        </div>
+                                    </div>
+                                    <form action="{{ route('subBox.store') }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="id" value="{{ $data->id }}">
+                                        <input type="text" name="type" value="{{ $data->type }}" id="type" class="d-none">
                                         <div class="row mb-4">
                                             <label for="nom" class="col-form-label col-lg-2">Nom</label>
                                             <div class="col-lg-10">
-                                                <input id="nom" name="nom" type="text" class="form-control" placeholder="Entrer le nom" value="{{ $data->nom }}">
+                                                <input id="nom" name="nom" value='{{ $data->nom }}' type="text" class="form-control" placeholder="Entrer le nom">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="num_serie" class="col-form-label col-lg-2">Numero Serie</label>
                                             <div class="col-lg-10">
-                                                <input id="num_serie" name="num_serie" type="text" class="form-control" placeholder="Entrer le numero serie" value="{{ $data->num_serie }}">
+                                                <input id="num_serie" name="num_serie" value='{{ $data->num_serie }}' type="text" class="form-control" placeholder="Entrer le numero serie">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <label for="modele" class="col-form-label col-lg-2">Modele</label>
                                             <div class="col-lg-10">
-                                                <input id="modele" name="modele" type="text" class="form-control" placeholder="Entrer le modele" value="{{ $data->modele }}">
+                                                <input id="modele" name="modele" value='{{ $data->modele }}' type="text" class="form-control" placeholder="Entrer le modele">
                                             </div>
                                         </div>
-                                        <div class="row mb-4">
+                                        {{-- <div class="row mb-4">
                                             <label for="num_dans_chaine" class="col-form-label col-lg-2">Numero Dans La Chaine</label>
                                             <div class="col-lg-10">
-                                                <input id="num_dans_chaine" name="num_dans_chaine" type="text" class="form-control" placeholder="Entrer l'adresse" value="{{ $data->num_dans_chaine }}">
+                                                <input id="num_dans_chaine" name="num_dans_chaine" type="text" class="form-control" placeholder="Entrer le numero dans la chaine">
+                                            </div>
+                                        </div> --}}
+                                        <div class="row mb-4">
+                                            <label for="hub_id" class="col-form-label col-lg-2">Hub</label>
+                                            <div class="col-lg-10">
+                                                <select id="hub_id" name="hub_id" class="form-control">
+                                                    <option value="">-- Selectionner Hub --</option>
+                                                    @foreach ($hubs as $hub)
+                                                        <option value="{{ $hub->id }}" {{ $data->hub_id == $hub->id ? 'selected' : '' }}>{{ $hub->nom }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="sub_box_suivant_id" class="col-form-label col-lg-2">SubBox</label>
+                                            <label for="sub_box_precedent_id" class="col-form-label col-lg-2">SubBox
+                                                Precedent</label>
                                             <div class="col-lg-10">
-                                                <select id="sub_box_suivant_id" name="sub_box_suivant_id" value="{{$data->sub_box_suivant_id}}" class="form-control">
+                                                <select id="sub_box_precedent_id" name="sub_box_precedent_id"
+                                                    class="form-control">
                                                     <option value="">-- Selectionner SubBox --</option>
                                                     @foreach ($subBoxs as $subBox)
-                                                        <option value="{{$subBox->id}}">{{$subBox->nom}}</option>
+                                                        <option value="{{ $subBox->id }}" {{ $data->sub_box_precedent_id == $subBox->id ? 'selected' : '' }}>{{ $subBox->nom }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="end_box_id" class="col-form-label col-lg-2">EndBox</label>
+                                            <label for="installation"
+                                                class="col-form-label col-lg-2">Installation</label>
                                             <div class="col-lg-10">
-                                                <select id="end_box_id" name="end_box_id" value="{{$data->end_box_id}}" class="form-control">
-                                                    <option value="">-- Selectionner EndBox --</option>
-                                                    @foreach ($endBoxs as $endBox)
-                                                        <option value="{{$endBox->id}}">{{$endBox->nom}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <label for="installation" class="col-form-label col-lg-2">Installation</label>
-                                            <div class="col-lg-10">
-                                                <select id="installation" name="installation" value="{{ $data->installation }}" class="form-control">
+                                                <select id="installation" name="installation" class="form-control">
                                                     <option value="Façade">Façade</option>
                                                     <option value="Poteau">Poteau</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <label for="date_mise_service" class="col-form-label col-lg-2">Date de Mise en Service</label>
+                                            <label for="date_mise_service" class="col-form-label col-lg-2">Date de
+                                                Mise en
+                                                Service</label>
                                             <div class="col-lg-10">
-                                                <input id="date_mise_service" name="date_mise_service" type="datetime-local" class="form-control" placeholder="Entrer la date de mise en service" value="{{ $data->date_mise_service }}">
+                                                <input id="date_mise_service" name="date_mise_service"  value='{{ $data->date_mise_service }}' type="datetime-local" class="form-control" placeholder="Entrer la date de mise en service">
                                             </div>
-                                        </div>    
+                                        </div>
                                         <div class="row mb-4">
                                             <label for="adresse" class="col-form-label col-lg-2">Adresse</label>
                                             <div class="col-lg-10">
-                                                <input id="adresse" name="adresse" type="text" class="form-control" placeholder="Entrer l'adresse" value="{{ $data->adresse }}">
+                                                <input id="adresse" name="adresse" value='{{ $data->adresse }}' type="text" class="form-control" placeholder="Entrer l'adresse">
                                             </div>
-                                        </div>                                  
+                                        </div>
                                         <div class="row mb-4">
                                             <label for="longitude" class="col-form-label col-lg-2">Coordonnées</label>
                                             <div class="col-lg-10">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-2 mb-md-0">
-                                                        <input id="longitude" name="longitude" type="float" class="form-control" placeholder="Longitude" value="{{ $data->longitude }}">
+                                                        <input id="longitude" name="longitude"  value='{{ $data->longitude }}' type="float" class="form-control" placeholder="Longitude">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input id="latitude" name="latitude" type="float" class="form-control" placeholder="Latitude" value="{{ $data->latitude }}">
+                                                        <input id="latitude" name="latitude" value='{{ $data->latitude }}' type="float" class="form-control" placeholder="Latitude">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row justify-content-end">
                                             <div class="col-lg-10">
-                                                <button type="submit" class="btn btn-primary">Modifier SubBox</button>
+                                                <button type="submit" class="btn btn-primary" id="Box">Modifier SubBox</button>
                                             </div>
                                         </div>
                                     </form>
@@ -139,9 +156,70 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
 
             @include('Admin/layout/footer')
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const type = document.getElementById('type');
+        const SubBox = document.getElementById('SubBox');
+        const EndBox = document.getElementById('EndBox');
+        const hub = document.getElementById('hub_id');
+        const Box = document.getElementById('Box');
+        const subBoxPrecedent = document.getElementById('sub_box_precedent_id');
+
+        if (type.value == 'SubBox') {
+            SubBox.classList.add('active')
+            Box.textContent = 'Modifier SubBox';
+            hub.disabled = false;
+            if(document.getElementById('sub_box_precedent_id').value != ''){
+                hub.disabled = true;
+            };
+            if(document.getElementById('hub_id').value != ''){
+                subBox.disabled = true;
+            };
+        } else {
+            EndBox.classList.add('active')
+            Box.textContent = 'Modifier EndBox';
+            hub.disabled = true;
+        }
+
+        SubBox.addEventListener('click', function() {
+            SubBox.classList.add('active');
+            EndBox.classList.remove('active');
+            type.value = 'SubBox';
+            hub.disabled = false;
+            Box.textContent = 'Modifier SubBox';
+        });
+
+        EndBox.addEventListener('click', function() {
+            EndBox.classList.add('active');
+            SubBox.classList.remove('active');
+            type.value = 'EndBox';
+            hub.disabled = true;
+            Box.textContent = 'Modifier EndBox';
+        });
+
+        hub.addEventListener('change', function() {
+            if (hub.value !== "") {
+                subBoxPrecedent.disabled = true;
+            } else {
+                subBoxPrecedent.disabled = false;
+            }
+        });
+
+        subBoxPrecedent.addEventListener('change', function() {
+            if (subBoxPrecedent.value !== "") {
+                hub.disabled = true;
+            } else {
+                if(!(EndBox.classList.contains('active'))){
+                    hub.disabled = false;
+                }
+            }
+        });
+    });
+</script>
 </html>

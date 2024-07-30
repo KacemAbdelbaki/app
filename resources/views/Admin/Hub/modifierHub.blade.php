@@ -70,10 +70,10 @@
                                         <div class="row mb-4">
                                             <label for="ports_affecte" class="col-form-label col-lg-2">Ports Affectes</label>
                                             <div class="col-lg-10">
-                                                <input id="ports_affecte" name="ports_affecte" value="{{ $data->ports_affecte }}" type="text" class="form-control d-none" placeholder="Entrer les ports affectes">
+                                                <input id="ports_affecte" name="ports_affecte" value="{{ $data->ports_affecte }}" type="text" class="form-control " placeholder="Entrer les ports affectes">
                                                 <div class="row justify-content-around">
                                                     @php
-                                                        $ports = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+                                                        $ports = [1, 2, 3, 4, 5, 6, 7, 8];
                                                     @endphp
                                                     <div class="row justify-content-around">
                                                         @foreach ($ports as $port)
@@ -171,6 +171,7 @@
     });
 
     function add(port) {
+        port = port.toString(); 
         const index = ports.indexOf(port);
 
         if (index !== -1) {

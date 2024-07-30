@@ -28,18 +28,12 @@
     <div id="layout-wrapper">
 
 
-        <!-- ========== Navbar Start ========== -->
+        <!-- ========== Navbar/Sidebar Start ========== -->
         @include('Admin/layout/navbar')
-        <!-- Navbar End -->
-
-        <!-- ========== Left Sidebar Start ========== -->
         @include('Admin/layout/sidebar')
-        <!-- Left Sidebar End -->
+        <!-- Left Navbar/Sidebar End -->
 
-
-        <!-- ============================================================== -->
         <!-- Start right Content here -->
-        <!-- ============================================================== -->
         <div class="main-content">
 
             <div class="page-content">
@@ -59,7 +53,6 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-
                                     <h4 class="card-title">Vous pouvez supprimer ou modifier des informations concernant les Hubs</h4>
                                     <br />
                                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
@@ -90,8 +83,8 @@
                                                     <td style="vertical-align: middle;">{{ $item->ports_affecte }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->adresse }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->nbr_chaine_actif }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->olt->nom }}</td>
-                                                    <td style="vertical-align: middle;">{{ $item->subBox->nom ?? "---"}}</td>
+                                                    <td style="vertical-align: middle;">{{ $item->olt->nom ?? "---"}}</td>
+                                                    <td style="vertical-align: middle;">@foreach ($item->subBox as $sub) {{$sub->nom}} @endforeach</td>
                                                     <td style="vertical-align: middle;">{{ $item->date_mise_service }}</td>
                                                     <td style="vertical-align: middle;">{{ $item->latitude }} {{ $item->longitude }}</td>
                                                     <td>
@@ -109,13 +102,9 @@
                             </div>
                         </div> <!-- end col -->
                     </div> <!-- end row -->
-
-
-
                 </div> <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
-
 
             <!-- ========== Footer Start ========== -->
             @include('Admin/layout/footer')

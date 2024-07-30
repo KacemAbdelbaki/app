@@ -7,49 +7,50 @@
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title" key="t-components">Outils</li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fas fa-user-friends" style='font-size:14px'></i>
-                        <span key="t-ui-elements">OLT</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('olts')}}" key="t-buttons">Liste des OLTs</a></li>
-                        <li><a href="{{route('ajouterOLT')}}" key="t-alerts">Ajouter un OLT</a></li>
-                    </ul>
-                </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fas fa-server" style='font-size:14px'></i>
+                            <span key="t-ui-elements">OLT</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('olts')}}" key="t-buttons">Liste des OLTs</a></li>
+                            <li><a href="{{route('ajouterOLT')}}" key="t-alerts">Ajouter un OLT</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fab fa-hubspot" style='font-size:14px'></i>
+                            <span key="t-ui-elements">Hub</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('hubs')}}" key="t-alerts">Liste des Hub</a></li>
+                            <li><a href="{{route('ajouterHub')}}" key="t-buttons">Ajouter un Hubs</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fas fa-boxes" style='font-size:14px'></i>
+                            {{-- <i class="fas fa-box" style='font-size:14px'></i> --}}
+                            <span key="t-ui-elements">SubBox / <i class="fas fa-box" style='font-size:14px'></i>EndBox</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('subBoxs')}}" key="t-alerts">Liste des SubBox</a></li>
+                            <li><a href="{{route('ajouterSubBox')}}" key="t-buttons">Ajouter un SubBoxs</a></li>
+                        </ul>
+                    </li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fa fa-users" style='font-size:14px'></i>
-                        <span key="t-ui-elements">Carte</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('cartes')}}" key="t-buttons">Liste des Cartes</a></li>
-                        <li><a href="{{route('ajouterCarte')}}" key="t-alerts">Ajouter une Carte</a></li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fa fa-users" style='font-size:14px'></i>
-                        <span key="t-ui-elements">Hub</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('hubs')}}" key="t-alerts">Liste des Hub</a></li>
-                        <li><a href="{{route('ajouterHub')}}" key="t-buttons">Ajouter un Hubs</a></li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="fa fa-users" style='font-size:14px'></i>
-                        <span key="t-ui-elements">SubBox</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('subBoxs')}}" key="t-alerts">Liste des SubBox</a></li>
-                        <li><a href="{{route('ajouterSubBox')}}" key="t-buttons">Ajouter un SubBoxs</a></li>
-                    </ul>
-                </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fas fa-hdd" style='font-size:14px'></i>
+                            <span key="t-ui-elements">Carte</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{route('cartes')}}" key="t-buttons">Liste des Cartes</a></li>
+                            <li><a href="{{route('ajouterCarte')}}" key="t-alerts">Ajouter une Carte</a></li>
+                        </ul>
+                    </li>
                 
                 </li>
             </ul>

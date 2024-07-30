@@ -72,7 +72,7 @@
                                                 <input id="ports_affecte" name="ports_affecte" type="text" class="form-control d-none" placeholder="Entrer les ports affectes">
                                                 <div class="row justify-content-around">
                                                     @php
-                                                        $ports = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+                                                        $ports = [1, 2, 3, 4, 5, 6, 7, 8];
                                                     @endphp
                                                     <div class="row justify-content-around">
                                                         @foreach ($ports as $port)

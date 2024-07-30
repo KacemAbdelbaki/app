@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Hub;
-use App\Models\SubBox;
 use App\Models\OLT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +37,7 @@ class HubController
         DB::raw('ST_Y(coordonne) as latitude'))
         ->where('nom', 'like', '%'.$request->searchInput.'%')
         ->with('olt')
+        ->with('subBox')
         ->get();
         return view('Admin/Hub/hub', ['data' => $hubs, 'page' => 'hubs']);
     }

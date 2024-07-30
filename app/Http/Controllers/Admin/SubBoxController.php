@@ -56,13 +56,13 @@ class SubBoxController
                DB::raw('ST_X(coordonne) as longitude'), 
                DB::raw('ST_Y(coordonne) as latitude'))
         ->where('id', $id)
+        ->with("subBox")
+        ->with("Hub")
         ->first();
         $subBox->date_mise_service = $subBox->date_mise_service ? Carbon::parse($subBox->date_mise_service)->format('Y-m-d\TH:i') : Carbon::parse("2024-07-08 01:52:00")->format('Y-m-d\TH:i');
-        $endBoxs = SubBox::select('*')
-        ->where('type', 'like', 'EndBox')
-        ->get();
-        $subBoxs = SUbBox::all();
-        return view('Admin/SubBox/modifierSubBox', ['data' => $subBox, 'endBoxs' => $endBoxs, 'subBoxs' => $subBoxs, 'page' => 'subBoxs']);
+        $hubs = Hub::all();
+        $subBoxs = SubBox::all();
+        return view('Admin/SubBox/modifierSubBox', ['data' => $subBox, 'hubs' => $hubs, 'subBoxs' => $subBoxs, 'page' => 'subBoxs']);
     }
 
     public function deleteSubBox($id)
