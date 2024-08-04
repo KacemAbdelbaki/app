@@ -32,7 +32,6 @@
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="fas fa-boxes" style='font-size:14px'></i>
-                            {{-- <i class="fas fa-box" style='font-size:14px'></i> --}}
                             <span key="t-ui-elements">SubBox / <i class="fas fa-box" style='font-size:14px'></i>EndBox</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
