@@ -39,14 +39,19 @@ class SubBoxController
         ->where('nom', 'like', '%'.$request->searchInput.'%')
         ->with('subBox')
         ->get();
-        (new DashboardController)->updateEquipmentOrder();
+        (new DashboardController)->updateEquipmentOrder($request);
         return view('Admin/SubBox/subBox', ['data' => $subBoxs, 'page' => 'subBoxs']);
     }
     
     public function addSubBox()
     {
-        $subBoxs = SubBox::all();
-        $hubs = Hub::all();
+        $subBoxs = SubBox::withCount('subBox')
+        ->having('sub_box_count', '=', 0)
+        ->where('type', 'like', 'SubBox')
+        ->get();
+        $hubs = Hub::withCount('subBox')
+        ->having('sub_box_count', '<=', 8)
+        ->get();
         return view('Admin/SubBox/ajouterSubBox', ['subBoxs' => $subBoxs, 'hubs' => $hubs, 'page' => 'subBoxs']);
     }
 

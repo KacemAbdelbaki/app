@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 
     <style>
         .equipment-chain {
@@ -167,6 +168,7 @@
     </div>
     
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
     <script>
         $(document).ready(function(){
@@ -291,8 +293,17 @@
                     .bindPopup("<b>{{ $chaine['olt']->nom }}</b><br>Type: {{ $chaine['olt']->type }}<br>Modèle: {{ $chaine['olt']->modele }}");
                 markers.push(marker);
             @endforeach
+
+            // ad the routing (to modify so that it activates once the olt is clicked and shows the hubs, the subs and the endbox connected to that olt)
+            L.Routing.control({
+                waypoints: [
+                    L.latLng(markers[0].getLatLng()),
+                    L.latLng(33.88395, 10.09)
+                ],
+                routeWhileDragging: true,
+            }).addTo(map);
+            document.querySelector('.leaflet-routing-container').style.display = 'none';
     
-            // Initial update of marker visibility
             updateMarkerVisibility();
     
             // var group = new L.featureGroup(map._layers);

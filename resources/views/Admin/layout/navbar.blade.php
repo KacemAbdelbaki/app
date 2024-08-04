@@ -34,17 +34,13 @@
                 </div>
             </form>
             <script>
-                // Get the search input element
                 var searchInput = document.getElementById('searchInput');
-                // Add event listener for input change
                 searchInput.addEventListener('input', function() {
                     document.getElementById('searchForm').submit();
                 });
-                // Set focus on the search input after the page loads
                  window.addEventListener('load', function() {
                     searchInput.focus();
                 });
-                // Restore cursor position after form submission
                 window.addEventListener('DOMContentLoaded', function() {
                     searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
                 });

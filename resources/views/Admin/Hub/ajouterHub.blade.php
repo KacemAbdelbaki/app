@@ -98,14 +98,7 @@
                                         <div class="row mb-4">
                                             <label for="longitude" class="col-form-label col-lg-2">Coordonnées</label>
                                             <div class="col-lg-10">
-                                                <div class="row">
-                                                    <div class="col-md-6 mb-2 mb-md-0">
-                                                        <input id="longitude" name="longitude" type="float" class="form-control" placeholder="Longitude">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input id="latitude" name="latitude" type="float" class="form-control" placeholder="Latitude">
-                                                    </div>
-                                                </div>
+                                                    @include('Admin/layout/mapDiv')
                                             </div>
                                         </div>
                                         <div class="row mb-4">
